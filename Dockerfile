@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 8000
 
 # Comando para iniciar o Django, sem scripts extras
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "apapescApp.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app.wsgi:application"]
