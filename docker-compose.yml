@@ -26,6 +26,7 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/apapesc_db
+      DJANGO_SETTINGS_MODULE: app.settings.production  # Define o módulo de configuração correto
     env_file:  # Carrega o arquivo .env para o serviço web
       - .env
     volumes:
