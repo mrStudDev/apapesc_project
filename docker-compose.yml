@@ -9,6 +9,7 @@ services:
       POSTGRES_DB: apapesc_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./staticfiles:/app/staticfiles
     ports:
       - "5433:5432"  # Porta do host para evitar conflito
     healthcheck:
