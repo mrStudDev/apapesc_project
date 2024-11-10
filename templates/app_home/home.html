@@ -8,6 +8,11 @@
 
 </head>
 <body>
-<h1 class="color-red">Olá Pescadores Apapesc Com Docker Para deploy</h1>
+        {% for home in homes %}
+            <h1 class="title-apapesc">{{ home.nome }}</h1>
+            <p>{{ home.meta_description }}</p>
+            <p>Slug: {{ home.slug }}</p>
+
+        {% endfor %}
 </body>
 </html>
