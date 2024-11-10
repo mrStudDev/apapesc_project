@@ -9,7 +9,6 @@ services:
       POSTGRES_DB: apapesc_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./staticfiles:/app/staticfiles
     ports:
       - "5433:5432"  # Porta do host para evitar conflito
     healthcheck:
@@ -27,6 +26,8 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/apapesc_db
+    volumes:
+      - ./staticfiles:/app/staticfiles  # Mapeia corretamente a pasta staticfiles para o serviço web
 
 volumes:
   postgres_data:
