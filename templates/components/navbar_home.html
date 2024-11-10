@@ -1,8 +1,11 @@
 <!-- components/navbar_home.html -->
+{% load static %}
 <nav class="bg-blue-600 text-white">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Logo -->
-        <a href="/" class="text-2xl font-bold">APAPESC</a>
+        <a href="/" class="flex items-center">
+            <img src="{% static 'images/logoapapesc.png' %}" alt="Logo APAPESC" class="w-16 h-16 md:w-24 md:h-24 object-contain">
+        </a>
 
         <!-- Menu para desktop -->
         <div class="hidden md:flex space-x-6">
@@ -41,3 +44,4 @@
         mobileMenu.classList.toggle('hidden');
     });
 </script>
+
