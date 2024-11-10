@@ -7,7 +7,8 @@ WORKDIR /app
 # Copiando os requisitos e instalando dependências
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
+# Verificando se as dependências estão instaladas corretamente
+RUN pip freeze
 # Copiando o código do projeto
 COPY . .
 

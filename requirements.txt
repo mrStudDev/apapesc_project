@@ -5,5 +5,5 @@ asgiref~=3.8.1
 sqlparse~=0.5.1
 psycopg2-binary~=2.9.10
 gunicorn~=20.1.0
-
+django-allauth
 django-environ==0.11.2
