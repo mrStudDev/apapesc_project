@@ -23,7 +23,8 @@ services:
       db:
         condition: service_healthy  # Espera o PostgreSQL estar pronto
     ports:
-      - "80:8000"
+      #- "80:8000"
+      - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/apapesc_db
 
