@@ -26,6 +26,8 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/apapesc_db
+    env_file:  # Carrega o arquivo .env para o serviço web
+      - .env
     volumes:
       - ./staticfiles:/app/staticfiles  # Mapeia corretamente a pasta staticfiles para o serviço web
 
