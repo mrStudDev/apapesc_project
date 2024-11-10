@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Home
 
-def home(request):
-    return render(request, 'app_home/home.html')
+class HomeListView(ListView):
+    model = Home
+    template_name = 'app_home/home.html'
+    context_object_name = 'homes'
+
