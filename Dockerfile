@@ -11,9 +11,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiando o código do projeto
 COPY . .
 
+# Rodando as migrações
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+
 # Expondo a porta 8000
 EXPOSE 8000
 
-# Comando para iniciar o Django, sem scripts extras
+# Comando para iniciar o Django com o Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "app.wsgi:application", "--log-file", "-"]
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Se preferir rodar o servidor de desenvolvimento
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
