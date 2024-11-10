@@ -15,5 +15,5 @@ COPY . .
 EXPOSE 8000
 
 # Comando para iniciar o Django, sem scripts extras
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "app.wsgi:application", "--log-file", "-", "--static-files", "/staticfiles"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "app.wsgi:application", "--log-file", "-"]
 
