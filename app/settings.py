@@ -24,11 +24,11 @@ SECRET_KEY = 'django-insecure-0fh@d0zbs9tbvd6$x8jhvrxd0#cj%b+ry$2d^)1&sf+g7zq)26
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#DEBUG = True
-#ALLOWED_HOSTS = []
+DEBUG = True
+ALLOWED_HOSTS = []
 
-DEBUG = False
-ALLOWED_HOSTS = ['34.123.22.119']
+#DEBUG = False
+#ALLOWED_HOSTS = ['34.123.22.119']
 
 
 # Application definition
@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Database produção
-
+# Database PRODUÇÃO
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -103,7 +103,7 @@ DATABASES = {
     }
 }
 
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

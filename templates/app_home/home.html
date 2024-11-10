@@ -7,6 +7,9 @@
     <title>Home - APAPESC</title>
     <!-- Importar Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+
     <link href="{% static 'output.css' %}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -18,23 +21,24 @@
     <section class="bg-blue-600 text-white py-20">
         <div class="container mx-auto text-center px-6 space-y-10">
 
+            <!-- Titulo e Descrição -->
             {% for home in homes %}
                 <h1 class="text-4xl font-bold mb-6">{{ home.nome }}</h1>
                 <p class="text-lg mb-6">{{ home.meta_description }}</p>
             {% endfor %}
-
-            <a href="#membership" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-md hover:bg-gray-200 transition">
+            <br>
+            <!-- Chamada para Ação -->
+            <a href="#membership" class="bg-white text-blue-600 font-semibold py-3 px-16 rounded-md hover:bg-gray-200 transition">
                 Seja um Associado
             </a>
-            <br><br><br>
+
             <!-- Linha Divisória -->
             <hr class="my-10 border-t border-gray-300 w-2/3 mx-auto">
-            <br>
 
             <!-- Conteúdo Principal -->
-            <div class="relative z-10 flex flex-col items-center text-center px-6 py-12 mt-10 rounded-lg shadow-lg bg-gradient-to-b from-blue-500 to-blue-700">
+            <div class="relative z-10 flex flex-col items-center text-center px-6 py-12 mt-10 rounded-lg shadow-lg bg-gradient-to-b from-blue-500 to-blue-700 space-y-6">
                 <!-- Título Principal -->
-                <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-4 md:mb-6">
                     Tradição e Cultura da Pesca em Santa Catarina
                 </h1>
 
@@ -42,13 +46,15 @@
                 <p class="text-base md:text-lg lg:text-xl text-gray-200 max-w-2xl leading-relaxed">
                     "A pesca em Santa Catarina é mais que uma atividade econômica; é uma tradição enraizada, passada de geração em geração.
                     Com respeito ao mar e à natureza, os pescadores catarinenses mantêm viva uma herança cultural que sustenta famílias,
-                    molda comunidades e fortalece a identidade regional."        <br><br>
+                    molda comunidades e fortalece a identidade regional."
                 </p>
             </div>
+
+            <!-- Linha Divisória Inferior -->
             <hr class="my-10 border-t border-gray-300 w-2/3 mx-auto">
-            <br><br><br>
         </div>
     </section>
+
 
     <!-- Imagem Responsiva com Texto Sobreposto -->
     <section class="relative w-full h-[300px] md:h-[500px]">
@@ -59,16 +65,19 @@
     </section>
 
     <!-- Título - Nossas Atividades -->
-    <section class="py-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-md">
+    <section class="py-20">
         <div class="container mx-auto text-center px-6 space-y-4">
 
             <!-- Título Principal -->
-            <h1 class="text-3xl font-bold text-blue-500 mb-4" style=" font-size:80px; text-decoration:gold;">
+            <h1 class="text-3xl md:text-5xl font-bold text-blue-500 leading-tight mb-4 md:mb-6">
                 Nossas Atividades
             </h1>
             <!-- Subtítulo -->
-            <p class="text-lg font-medium text-blue-500 py-2">
-                Participação ativa no desenvolvimento social regional
+            <p class="text-lg font-medium text-gray-400 py-2">
+                A APAPESC desempenha um papel fundamental com participação ativa no desenvolvimento social regional.
+                Nossa missão é contribuir para o crescimento sustentável da região, assegurando aos associados e à
+                comunidade a legalidade da atividade pesqueira no estado de Santa Catarina. Estamos comprometidos com
+                o equilíbrio da pesca sustentável e no combate a práticas exploratórias ilegais.
             </p>
 
         </div>
@@ -136,7 +145,7 @@
         <div class="container mx-auto text-center px-6">
             <h2 class="text-3xl font-bold mb-4">Associe-se à APAPESC</h2>
             <p class="text-lg mb-6">Junte-se a nós e faça parte de uma comunidade dedicada ao desenvolvimento sustentável da pesca.</p>
-            <a href="/associar" class="bg-white text-blue-700 font-semibold py-3 px-6 rounded-md hover:bg-gray-200 transition">
+            <a href="/" class="bg-white text-blue-700 font-semibold py-3 px-6 rounded-md hover:bg-gray-200 transition">
                 Seja um Associado
             </a>
         </div>
