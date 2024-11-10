@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Home - APAPESC</title>
+    <link href="{% static 'output.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 </head>
 <body>
         {% for home in homes %}
-            <h1 class="title-apapesc">{{ home.nome }}</h1>
+            <h1 class="bg-blue-500 text-white p-4">{{ home.nome }}</h1>
             <p>{{ home.meta_description }}</p>
             <p>Slug: {{ home.slug }}</p>
 
