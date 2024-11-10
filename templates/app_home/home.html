@@ -3,17 +3,142 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importar Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Home - APAPESC</title>
     <link href="{% static 'output.css' %}" rel="stylesheet">
-
-
 </head>
-<body>
-        {% for home in homes %}
-            <h1 class="bg-blue-500 text-white p-4">{{ home.nome }}</h1>
-            <p>{{ home.meta_description }}</p>
-            <p>Slug: {{ home.slug }}</p>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    {% include "components/navbar_home.html" %}
 
-        {% endfor %}
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-20">
+        <div class="container mx-auto text-center">
+            {% for home in homes %}
+                <h1 class="text-4xl font-bold mb-4">{{ home.nome }}</h1>
+                <p class="text-lg mb-6">{{ home.meta_description }}</p>
+            {% endfor %}
+            <a href="#membership" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-md hover:bg-gray-200 transition">
+                Seja um Associado
+            </a>
+        </div>
+    </section>
+
+<!-- Cards Section -->
+<section class="py-16">
+    <div class="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card: Representação e Defesa de Direitos -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Representação e Defesa</h2>
+                <p class="text-gray-700 mb-4">A APAPESC defende os direitos dos pescadores em instâncias públicas e privadas, promovendo regulamentações justas e sustentáveis.</p>
+                <a href="/representacao" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+        <!-- Card: Capacitação e Treinamentos -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Capacitação Profissional</h2>
+                <p class="text-gray-700 mb-4">Oferecemos cursos e treinamentos para melhorar as técnicas de pesca e garantir a sustentabilidade dos recursos.</p>
+                <a href="/capacitacao" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+        <!-- Card: Acesso a Benefícios e Convênios -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Benefícios e Convênios</h2>
+                <p class="text-gray-700 mb-4">Associados têm acesso a convênios com instituições de saúde, educação e descontos em produtos para pesca.</p>
+                <a href="/beneficios" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+        <!-- Card: Suporte Jurídico -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Suporte Jurídico</h2>
+                <p class="text-gray-700 mb-4">Nossa equipe oferece suporte jurídico para associados, ajudando com questões legais e trabalhistas.</p>
+                <a href="/juridico" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+        <!-- Card: Projetos Sustentáveis -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Projetos Sustentáveis</h2>
+                <p class="text-gray-700 mb-4">Participamos de projetos que visam a sustentabilidade e a preservação dos recursos pesqueiros.</p>
+                <a href="/projetos-sustentaveis" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+        <!-- Card: Feiras e Eventos -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Feiras e Eventos</h2>
+                <p class="text-gray-700 mb-4">Organizamos feiras e eventos que promovem o trabalho dos pescadores e aproximam a comunidade.</p>
+                <a href="/eventos" class="text-blue-500 hover:text-blue-700 font-semibold">Saiba mais</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- Call-to-Action Section -->
+    <section id="membership" class="bg-blue-700 text-white py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">Associe-se à APAPESC</h2>
+            <p class="text-lg mb-6">Junte-se a nós e faça parte de uma comunidade dedicada ao desenvolvimento sustentável da pesca.</p>
+            <a href="/associar" class="bg-white text-blue-700 font-semibold py-3 px-6 rounded-md hover:bg-gray-200 transition">
+                Seja um Associado
+            </a>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-10">
+    <div class="container mx-auto px-6 md:flex md:justify-between items-center text-center md:text-left">
+
+        <!-- Informações de Direitos e Autoria -->
+        <div class="mb-6 md:mb-0">
+            <p class="text-sm">© {{ current_year }} APAPESC. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Desenvolvido por Marcos Rodrigues (Back e Front-end).</p>
+        </div>
+
+        <!-- Links de Navegação -->
+        <div class="space-x-4 mb-6 md:mb-0">
+            <a href="#" class="text-gray-400 hover:text-white text-sm">Política de Privacidade</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm">Termos de Uso</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm">Contato</a>
+        </div>
+
+        <!-- Ícones de Redes Sociais -->
+        <div class="flex justify-center space-x-4 text-gray-400">
+            <a href="https://facebook.com" class="hover:text-white" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <span class="material-icons text-2xl">facebook</span>
+            </a>
+            <a href="https://youtube.com" class="hover:text-white" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <span class="material-icons text-2xl">play_circle</span>
+            </a>
+            <a href="https://instagram.com" class="hover:text-white" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <span class="material-icons text-2xl">photo_camera</span>
+            </a>
+            <a href="https://linkedin.com" class="hover:text-white" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <span class="material-icons text-2xl">business_center</span>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Importar Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+
 </body>
 </html>
