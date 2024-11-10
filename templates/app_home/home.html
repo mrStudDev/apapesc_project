@@ -12,6 +12,27 @@
 <body class="bg-gray-100 text-gray-800">
     <!-- Navbar -->
     {% include "components/navbar_home.html" %}
+<!-- Imagem Responsiva com Logo e Texto Sobreposto -->
+<section class="relative w-full h-[300px] md:h-[500px]">
+    <img src="{% static 'images/mar.jpg' %}" alt="Pescador" class="w-full h-full object-cover">
+
+    <!-- Conteúdo Sobreposto: Logo e Texto -->
+    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+        <div class="flex items-center space-x-4 max-w-2xl">
+            <!-- Logo -->
+            <img src="{% static 'images/logoapapesc.png' %}" alt="Logo APAPESC" class="w-16 h-16 md:w-24 md:h-24 object-contain">
+
+            <!-- Texto -->
+            <h2 class="text-white text-lg md:text-2xl font-semibold">
+                "A pesca em Santa Catarina é mais que uma atividade econômica; é uma tradição enraizada, passada de geração em geração.
+                Com respeito ao mar e à natureza, os pescadores catarinenses mantêm viva uma herança cultural que sustenta famílias,
+                molda comunidades e fortalece a identidade regional."
+            </h2>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- Hero Section -->
     <section class="bg-blue-600 text-white py-20">
