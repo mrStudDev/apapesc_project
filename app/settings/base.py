@@ -19,8 +19,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
     'app_home',
+    'app_manager',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -30,6 +34,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Middleware do allauth
+    'allauth.account.middleware.AccountMiddleware',  # Linha faltante
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -50,6 +56,13 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Isso permite login tradicional
+)
+
+
+
 WSGI_APPLICATION = 'app.wsgi.application'
 
 LANGUAGE_CODE = 'pt-br'
@@ -65,3 +78,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL = '/manager/'  # Após login, redirecionar para a homepage
+LOGOUT_REDIRECT_URL = '/'  # Após logout, redirecionar para a homepage
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Para debug (não envia e-mails reais)

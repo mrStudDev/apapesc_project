@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100 text-gray-900">
+  <!-- Container geral -->
+  <div class="flex min-h-screen">
+    <!-- Menu Lateral -->
+    <div class="w-64 bg-blue-800 text-white p-4 space-y-6">
+      <!-- Título e Nome do Usuário -->
+      <h2 class="text-2xl font-semibold text-center">APAPESC</h2>
+      <div class="mt-4 text-center text-sm">
+        <p>Bem-vindo, <span class="font-semibold">{{user.username}}</span></p>
+        <p class="text-gray-400">Administrador</p>
+      </div>
+
+      <!-- Menu de navegação -->
+      <nav class="space-y-4 mt-6">
+        <a href="#" class="block p-2 hover:bg-blue-600 rounded">Associados</a>
+        <a href="#" class="block p-2 hover:bg-blue-600 rounded">Documentos</a>
+        <a href="#" class="block p-2 hover:bg-blue-600 rounded">Embarcações</a>
+        <a href="#" class="block p-2 hover:bg-blue-600 rounded">Agendamentos</a>
+        <a href="#" class="block p-2 hover:bg-blue-600 rounded">Tarefas</a>
+        <a href="{% url 'account_logout' %}" class="block p-2 hover:bg-yellow-600 rounded">Sair</a>
+      </nav>
+    </div>
+
+    <!-- Área de conteúdo -->
+    <div class="flex-1 p-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Painel de Associados -->
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+          <h3 class="text-lg font-semibold">Associados</h3>
+          <div class="mt-2 text-4xl">120</div>
+        </div>
+        <!-- Painel de Agendamentos -->
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+          <h3 class="text-lg font-semibold">Agendamentos</h3>
+          <div class="mt-2 text-4xl">35</div>
+        </div>
+        <!-- Painel de Tarefas -->
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+          <h3 class="text-lg font-semibold">Tarefas</h3>
+          <div class="mt-2 text-4xl">10</div>
+        </div>
+      </div>
+
+      <!-- Espaço para conteúdo adicional (Gráficos, Tabelas, etc.) -->
+      <div class="mt-8 bg-white p-4 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold">Detalhes adicionais</h3>
+        <p class="mt-2">Aqui você pode adicionar gráficos, tabelas e outros dados relevantes.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
