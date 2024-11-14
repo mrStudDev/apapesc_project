@@ -201,16 +201,16 @@
                 </tr>
               </thead>
               <tbody>
-                {% for reparticao in associados_por_reparticao %}
-                  <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3 px-4 text-gray-800">{{ reparticao.nome_reparticao }}</td>
-                    <td class="py-3 px-4 text-gray-800">{{ reparticao.associados_count }}</td>
-                  </tr>
-                {% empty %}
-                  <tr>
-                    <td colspan="2" class="py-3 px-4 text-center text-gray-500">Nenhuma repartição encontrada.</td>
-                  </tr>
-                {% endfor %}
+                    {% for reparticao in associados_por_reparticao %}
+                        <tr class="border-b">
+                            <td class="py-2 px-4">{{ reparticao.reparticao__nome_reparticao }}</td>
+                            <td class="py-2 px-4">{{ reparticao.associados_count }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2" class="py-2 px-4 text-center text-gray-500">Nenhuma repartição encontrada.</td>
+                        </tr>
+                    {% endfor %}
               </tbody>
             </table>
           </div>
@@ -229,15 +229,15 @@
                 </tr>
               </thead>
               <tbody>
-                {% for municipio in associados_por_municipio %}
-                  <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3 px-4 text-gray-800">{{ municipio.municipio }}</td>
-                    <td class="py-3 px-4 text-gray-800">{{ municipio.associados_count }}</td>
-                  </tr>
+                {% for municipio in associados_por_municipio_circunscricao %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{ municipio.municipio_circunscricao__municipio }}</td>
+                        <td class="py-2 px-4">{{ municipio.associados_count }}</td>
+                    </tr>
                 {% empty %}
-                  <tr>
-                    <td colspan="2" class="py-3 px-4 text-center text-gray-500">Nenhum município encontrado.</td>
-                  </tr>
+                    <tr>
+                        <td colspan="2" class="py-2 px-4 text-center text-gray-500">Nenhum município encontrado.</td>
+                    </tr>
                 {% endfor %}
               </tbody>
             </table>

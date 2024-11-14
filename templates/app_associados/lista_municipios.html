@@ -5,37 +5,42 @@
 {% include "components/navbar_apapesc.html" %}
 
 <!-- Container principal -->
-<div class="container mx-auto py-6">
+<div class="container mx-auto py-6 px-4 max-w-4xl">
   <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Lista de Municípios de Circunscrição</h1>
 
+  <!-- Botão para adicionar novo município -->
+  <div class="text-center mb-4">
+    <a href="{% url 'app_associados:criar_municipio' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+      Adicionar Novo Município
+    </a>
+  </div>
+
   <!-- Card de listagem de municípios -->
-  <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
     {% if municipios %}
-      <ul class="space-y-4">
-        {% for municipio in municipios %}
-          <li class="flex justify-between items-center p-4 border border-gray-300 rounded-md hover:bg-gray-50">
-            <div class="text-lg text-gray-800">{{ municipio.municipio }}</div>
-            <div class="flex space-x-4">
-              <!-- Link para editar -->
-              <a href="{% url 'app_associados:editar_municipio' municipio.id %}" class="text-blue-500 hover:underline">
-                Editar
-              </a>
-              <!-- Link para deletar -->
-              <a href="{% url 'app_associados:deletar_municipio' municipio.id %}" class="text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir este município?');">
-                Deletar
-              </a>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
+      {% for municipio in municipios %}
+        <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+          <div class="text-lg font-semibold text-gray-800 mb-1">{{ municipio.municipio }}</div>
+          <div class="flex justify-between items-center mt-2 text-sm">
+            <!-- Link para editar -->
+            <a href="{% url 'app_associados:editar_municipio' municipio.id %}" class="text-blue-500 hover:underline">
+              Editar
+            </a>
+            <!-- Link para deletar -->
+            <a href="{% url 'app_associados:deletar_municipio' municipio.id %}" class="text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir este município?');">
+              Deletar
+            </a>
+          </div>
+        </div>
+      {% endfor %}
     {% else %}
-      <p class="text-gray-600 text-center">Nenhum município cadastrado.</p>
+      <p class="text-gray-600 text-center col-span-full">Nenhum município cadastrado.</p>
     {% endif %}
   </div>
 
-  <!-- Botão para adicionar novo município -->
-  <div class="mt-6 text-center">
-    <a href="{% url 'app_associados:criar_municipio' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+  <!-- Botão para adicionar novo município (segundo botão) -->
+  <div class="text-center mt-6">
+    <a href="{% url 'app_associados:criar_municipio' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
       Adicionar Novo Município
     </a>
   </div>

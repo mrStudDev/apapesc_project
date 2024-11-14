@@ -32,7 +32,7 @@
               <div class="mt-1">
                 {{ form.nome_completo }}
               </div>
-              <small class="text-red-500 text-xs mt-1"> Obrigatório</small>
+              <small class="text-gray-400  text-xs mt-1"> Obrigatório</small>
               {% for error in form.nome_completo.errors %}
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
@@ -45,7 +45,7 @@
               <div class="mt-1">
                 {{ form.cpf }}
               </div>
-              <small class="text-red-500 text-xs mt-1"> Obrigatório</small>
+              <small class="text-gray-400 text-xs mt-1"> Obrigatório</small>
               {% for error in form.cpf.errors %}
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
@@ -58,7 +58,7 @@
               <div class="mt-1">
                 {{ form.celular }}
               </div>
-              <small class="text-red-500 text-xs mt-1"> Obrigatório</small>
+              <small class="text-gray-400 text-xs mt-1"> Obrigatório</small>
               {% for error in form.celular.errors %}
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}

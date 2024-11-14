@@ -19,7 +19,7 @@ class AssociadoForm(forms.ModelForm):
             # Informações Pessoais
             'nome_completo': forms.TextInput(attrs={
                 'placeholder': 'Digite o nome completo',
-                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-green-600 font-bold leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             }),
             'cpf': forms.TextInput(attrs={
                 'id': 'id_cpf',
@@ -34,7 +34,7 @@ class AssociadoForm(forms.ModelForm):
             }),
             'email': forms.EmailInput(attrs={
                 'placeholder': 'exemplo@email.com',
-                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-blue-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             }),
             'foto': forms.FileInput(attrs={
                 'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500'

@@ -8,6 +8,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 SEXO_CHOICES = [
     ('Masculino', 'Masculino'),
     ('Feminino', 'Feminino'),
+    ('Não declarado', 'Não declarado'),
 ]
 
 UF_CHOICES = [
@@ -19,7 +20,7 @@ UF_CHOICES = [
     ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'),
     ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'),
     ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),
-    ('TO', 'Tocantins')
+    ('TO', 'Tocantins'), ('UF', 'UF'),
 ]
 
 
@@ -50,6 +51,7 @@ EMISSOR_RG_CHOICES = [
     ('SSP/SP', 'SSP/SP'),
     ('SSP/SE', 'SSP/SE'),
     ('SSP/TO', 'SSP/TO'),
+    ('UF', 'UF'),
 ]
 
 STATUS_CHOICES = [
@@ -119,12 +121,12 @@ class AssociadoModel(models.Model):
     rg_orgao = models.CharField(
         max_length=10,
         choices=EMISSOR_RG_CHOICES,
-        default='',  # Um valor padrão, se necessário,
+        default='UF',  # Um valor padrão, se necessário,
         verbose_name="RG-Orgão Emissor"
     )
     rg_data_emissao = models.DateField(blank=True, null=True, verbose_name="Data Emissão do RG")
     naturalidade = models.CharField(max_length=100, blank=True, null=True)
-    sexo_biologico = models.CharField(max_length=10, choices=SEXO_CHOICES, default="",
+    sexo_biologico = models.CharField(max_length=15, choices=SEXO_CHOICES, default="Não declarado",
                                       verbose_name="Sexo Biológico")
     nome_mae = models.CharField(max_length=100, verbose_name="Nome da Mãe", blank=True, null=True)
     nome_pai = models.CharField(max_length=100, verbose_name="Nome do Pai", blank=True, null=True)
@@ -145,7 +147,7 @@ class AssociadoModel(models.Model):
                             verbose_name="Número Carteira Trabalho (CTPS)")
     ctps_serie = models.CharField(max_length=25, blank=True, null=True, verbose_name="CTPS - Série")
     ctps_data_emissao = models.DateField(blank=True, null=True, verbose_name="Data Emissão da CTPS")
-    ctps_uf = models.CharField(blank=True, null=True, max_length=2, choices=UF_CHOICES, default="",
+    ctps_uf = models.CharField(blank=True, null=True, max_length=2, choices=UF_CHOICES, default="UF",
                                verbose_name="CTPS UF")
     # Documentação de Hanbilitação
     cnh = models.CharField(max_length=25, blank=True, null=True, unique=True, verbose_name="Núm. Registro da CNH")

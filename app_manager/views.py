@@ -14,16 +14,24 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['associados_homens'] = AssociadoModel.objects.filter(sexo_biologico="Masculino").count()
         context['associados_mulheres'] = AssociadoModel.objects.filter(sexo_biologico="Feminino").count()
         context['associados_indefinidos'] = AssociadoModel.objects.filter(sexo_biologico="").count()
+
+
         # Contagem de associados por repartição
-        associados_por_reparticao = ReparticaoModel.objects.annotate(
-            associados_count=Count('associados')
-        ).order_by('nome_reparticao')
+        associados_por_reparticao = (
+            AssociadoModel.objects
+            .values('reparticao__nome_reparticao')  # Pega o nome da repartição associada
+            .annotate(associados_count=Count('id'))  # Conta os associados em cada repartição
+            .order_by('reparticao__nome_reparticao')
+        )
 
         # Contagem de associados por município de circunscrição
-        associados_por_municipio = MunicipiosCircusnscricaoModel.objects.annotate(
-            associados_count=Count('reparticoes__associados')
-        ).order_by('municipio')
+        associados_por_municipio_circunscricao = (
+            AssociadoModel.objects
+            .values('municipio_circunscricao__municipio')  # Pega o nome do município de circunscrição
+            .annotate(associados_count=Count('id'))  # Conta os associados em cada município
+            .order_by('municipio_circunscricao__municipio')
+        )
 
         context['associados_por_reparticao'] = associados_por_reparticao
-        context['associados_por_municipio'] = associados_por_municipio
+        context['associados_por_municipio_circunscricao'] = associados_por_municipio_circunscricao
         return context

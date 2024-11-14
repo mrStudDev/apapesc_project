@@ -147,21 +147,21 @@ class ReparticaoCreateView(LoginRequiredMixin, CreateView):
     form_class = ReparticaoForm
     template_name = 'app_associados/criar_reparticao.html'  # Substitua pelo nome do seu template
 
-    def get_success_url(self):
-        # Redireciona para a página de detalhes usando o `pk` do objeto recém-criado
-        return reverse('app_associados:detail_reparticao', kwargs={'pk': self.object.pk})
-
     def form_valid(self, form):
         # Salva o objeto
         self.object = form.save()
 
-        # Verifica se o botão "Salvar e Continuar" foi pressionado
+        # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            # Recarrega a mesma página com os dados preenchidos no formulário
-            return self.render_to_response(self.get_context_data(form=form))
+            # Redireciona para a mesma página de edição
+            return redirect('app_associados:editar_reparticao', pk=self.object.pk)
 
-        # Caso contrário, redireciona para a URL padrão configurada em `get_success_url`
+        # Caso contrário, redireciona para a página de detalhe
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # URL de sucesso padrão para redirecionar ao detalhe
+        return reverse_lazy('app_associados:detail_reparticao', kwargs={'pk': self.object.pk})
 
 
 class ReparticaoDetailView(LoginRequiredMixin, DetailView):
@@ -179,13 +179,17 @@ class ReparticaoUpdateView(LoginRequiredMixin, UpdateView):
         # Salva o objeto
         self.object = form.save()
 
-        # Verifica se o botão "Salvar e Continuar" foi pressionado
+        # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            # Recarrega a mesma página com os dados preenchidos no formulário
-            return self.render_to_response(self.get_context_data(form=form))
+            # Redireciona para a mesma página de edição
+            return redirect('app_associados:editar_reparticao', pk=self.object.pk)
 
-        # Caso contrário, redireciona para a URL padrão
+        # Caso contrário, redireciona para a página de detalhe
         return super().form_valid(form)
+
+    def get_success_url(self):
+        # URL de sucesso padrão para redirecionar ao detalhe
+        return reverse_lazy('app_associados:detail_reparticao', kwargs={'pk': self.object.pk})
 
 
 class ReparticaoDeleteView(LoginRequiredMixin, DeleteView):
