@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block lista_municipios %}
+<!-- Navbar -->
+{% include "components/navbar_apapesc.html" %}
+
+<!-- Container principal -->
+<div class="container mx-auto py-6">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Lista de Municípios de Circunscrição</h1>
+
+  <!-- Card de listagem de municípios -->
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    {% if municipios %}
+      <ul class="space-y-4">
+        {% for municipio in municipios %}
+          <li class="flex justify-between items-center p-4 border border-gray-300 rounded-md hover:bg-gray-50">
+            <div class="text-lg text-gray-800">{{ municipio.municipio }}</div>
+            <div class="flex space-x-4">
+              <!-- Link para editar -->
+              <a href="{% url 'app_associados:editar_municipio' municipio.id %}" class="text-blue-500 hover:underline">
+                Editar
+              </a>
+              <!-- Link para deletar -->
+              <a href="{% url 'app_associados:deletar_municipio' municipio.id %}" class="text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir este município?');">
+                Deletar
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-gray-600 text-center">Nenhum município cadastrado.</p>
+    {% endif %}
+  </div>
+
+  <!-- Botão para adicionar novo município -->
+  <div class="mt-6 text-center">
+    <a href="{% url 'app_associados:criar_municipio' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+      Adicionar Novo Município
+    </a>
+  </div>
+</div>
+{% endblock lista_municipios %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block criar_reparticao %}
+    <!-- Navbar -->
+    {% include "components/navbar_apapesc.html" %}
+<div class="container mx-auto py-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Adicionar Repartição</h1>
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Seção Nome da Repartição -->
+            <div class="mb-8 border-b pb-4">
+                <h2 class="text-xl font-semibold text-gray-700 mb-3">Nome da Repartição</h2>
+                <div class="mb-4">
+                    <small>OBS: Ao nomear uma repartição, sempre use nome e sobrenome! <br><br>
+                        EX: <strong>Matriz de Florianópolis</strong> <br>
+                        EX: <strong>Repartição de Garopara</strong><br>
+                        EX: <strong>Repartição de Balneário</strong>
+                    </small>
+                    <br><br>
+                    <label for="{{ form.nome_reparticao.id_for_label }}" class="block text-sm font-medium text-gray-700">Nome da Repartição</label>
+                    {{ form.nome_reparticao }}
+                    {% for error in form.nome_reparticao.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Seção Município Sede -->
+            <div class="mb-8 border-b pb-4">
+                <h2 class="text-xl font-semibold text-gray-700 mb-3">Município Sede da Repartição</h2>
+                <div class="mb-4">
+                    <label for="{{ form.municipio_sede.id_for_label }}" class="block text-sm font-medium text-gray-700">Município Sede</label>
+                    {{ form.municipio_sede }}
+                    {% for error in form.municipio_sede.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="mb-4" id="novo-municipio-sede-container" style="display: none;">
+                    <label for="{{ form.novo_municipio_sede.id_for_label }}" class="block text-sm font-medium text-green-700">Ou, adicione um Município Sede</label>
+                    {{ form.novo_municipio_sede }}
+                    {% for error in form.novo_municipio_sede.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Seção Dados do Delegado -->
+            <div class="mb-8 border-b pb-4">
+                <h2 class="text-xl font-semibold text-gray-700 mb-3">Dados do Delegado</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="{{ form.delegado_responsavel.id_for_label }}" class="block text-sm font-medium text-gray-700">Delegado Responsável</label>
+                        {{ form.delegado_responsavel }}
+                        {% for error in form.delegado_responsavel.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="{{ form.email_delegado.id_for_label }}" class="block text-sm font-medium text-gray-700">Email do Delegado</label>
+                        {{ form.email_delegado }}
+                        {% for error in form.email_delegado.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="{{ form.celular_delegado.id_for_label }}" class="block text-sm font-medium text-gray-700">Celular do Delegado</label>
+                        {{ form.celular_delegado }}
+                        {% for error in form.celular_delegado.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção Municípios de Circunscrição -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-700 mb-3">Municípios de Circunscrição</h2>
+                <small>Uma repartição Apapesc pode ter uma área de atuação mais ampla que os limites do seu município sede.
+                    Ou seja, a circunscrição sobre a qual exerce sua competência, poderá abranger outros municípios.
+                    Assim, é possível determinar múltiplos municípios para uma mesma repartição.
+                </small>
+                <br><br>
+                <div class="mb-4">
+                    <label for="{{ form.municipios_circunscricao.id_for_label }}" class="block text-sm font-medium text-gray-700">Municípios</label>
+                    {{ form.municipios_circunscricao }}
+                    {% for error in form.municipios_circunscricao.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex items-center space-x-2">
+                    <small class="text-gray-600">Adicionar Município de Circunscrição</small>
+                    <a href="{% url 'app_associados:criar_municipio' %}" target="_blank" class="text-green-500 hover:text-green-700">
+                        <i class="material-icons" style="font-size: 17px;">add_circle_outline</i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="mt-8 flex items-center space-x-4">
+                <button type="submit" name="save_and_continue" value="1" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    Atualizar...
+                </button>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">Salvar</button>
+                <a href="#" class="text-blue-500 hover:underline ml-4">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Carregar o JavaScript separado -->
+<script src="{% static 'js/municipio_select.js' %}"></script>
+
+{% endblock criar_reparticao %}

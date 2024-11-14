@@ -1,0 +1,48 @@
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - APAPESC</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="{% static 'output.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!--BLOCOS DO APP MANAGER-->
+{% block dashboard %}{% endblock dashboard %}
+{% block finances %}{% endblock finances %}
+
+<!--BLOCOS DO APP ASSOCIADOS-->
+<!-- Cadastro e gerenciamento de Associados -->
+{% block lista_associados %}{% endblock lista_associados %}
+{% block cadastro_associados %}{% endblock cadastro_associados %}
+{% block detail_associados %}{% endblock detail_associados %}
+{% block editar_associado %}{% endblock editar_associado %}
+{% block delete_associado %}{% endblock delete_associado %}
+{% block aposentados %}{% endblock aposentados %}
+{% block buscar_associado %}{% endblock buscar_associado %}
+
+<!--Cadastro e de Repartições -->
+ {% block lista_reparticoes %}{% endblock lista_reparticoes %}
+{% block detail_reparticao %}{% endblock detail_reparticao %}
+{% block criar_reparticao %}{% endblock criar_reparticao %}
+{% block editar_reparticao %}{% endblock editar_reparticao %}
+{% block deletar_reparticao %}{% endblock deletar_reparticao %}
+
+<!--Cadastro e gerenciamento de Municípios de Circunscrição -->
+{% block lista_municipios %}{% endblock lista_municipios %}
+{% block criar_municipio %}{% endblock criar_municipio %}
+{% block editar_municipio %}{% endblock editar_municipio %}
+{% block deletar_municipio %}{% endblock deletar_municipio %}
+
+
+<!--BLOCOS DO APP DOCUMENTOS-->
+<!--BLOCOS DO APP TAREFAS-->
+<!--BLOCOS DO APP AGENDAMENTOS-->
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block detail_reparticao %}
+  <!-- Navbar -->
+  {% include 'components/navbar_apapesc.html' %}
+
+  <div class="container max-w-2xl mx-auto py-6 px-4">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Detalhes da Repartição</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold text-blue-700 mb-4">{{ reparticao.nome_reparticao }}</h2>
+
+      <div class="space-y-2">
+        <p><strong class="text-gray-600">Município Sede:</strong> {{ reparticao.municipio_sede }}</p>
+        <p><strong class="text-gray-600">Delegado Responsável:</strong> {{ reparticao.delegado_responsavel }}</p>
+        <p class="flex items-center">
+          <strong class="text-gray-600">Email do Delegado:</strong>
+          <a href="mailto:{{ reparticao.email_delegado }}" class="text-blue-600 hover:underline ml-2">
+            {{ reparticao.email_delegado }}
+          </a>
+        </p>
+        <p class="flex items-center">
+          <strong class="text-gray-600">Celular do Delegado:</strong>
+          <span id="celular-{{ reparticao.id }}" class="ml-2">{{ reparticao.celular_delegado }}</span>
+          <button onclick="copyToClipboard('#celular-{{ reparticao.id }}')" class="ml-2 text-gray-500 hover:text-gray-700">
+            <i class="material-icons" style="font-size: 18px;">content_copy</i>
+          </button>
+        </p>
+      </div>
+
+      <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Municípios de Circunscrição</h3>
+      <ul class="list-disc pl-6 text-gray-700">
+        {% for municipio in reparticao.municipios_circunscricao.all %}
+          <li>{{ municipio.municipio }}</li>
+        {% empty %}
+          <li class="text-gray-500">Nenhum município listado.</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Botões de Ação -->
+      <div class="mt-6 flex justify-between">
+        <a href="{% url 'app_associados:editar_reparticao' reparticao.id %}"
+           class="text-sm bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+          Editar
+        </a>
+        <a href="{% url 'app_associados:deletar_reparticao' reparticao.id %}"
+           class="text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+          Deletar
+        </a>
+      </div>
+
+      <!-- Botão de Voltar -->
+      <div class="mt-4 text-center">
+        <a href="{% url 'app_associados:lista_reparticoes' %}" class="text-blue-500 hover:underline">
+          Voltar à lista de repartições
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Inclua o arquivo JavaScript externo -->
+  <script src="{% static 'js/copy_to_clipboard.js' %}"></script>
+{% endblock detail_reparticao %}
+
+
+

@@ -19,6 +19,8 @@
                 <a href="{% url 'account_login' %}" class="hover:text-gray-200">Login</a>
             {% else %}
                 <a href="{% url 'account_logout' %}" class="hover:text-gray-200">Logout</a>
+                <a href="#" class="hover:bg-blue-700"><strong class="text-yellow-300">Olá, {{user.username}}</strong></a>
+                <a href="{% url 'app_manager:dashboard' %}" class="hover:text-gray-200">Painel</a>
             {% endif %}
         </div>
 
@@ -43,6 +45,9 @@
             <a href="{% url 'account_login' %}" class="block px-4 py-2 hover:bg-blue-700">Login</a>
         {% else %}
             <a href="{% url 'account_logout' %}" class="block px-4 py-2 hover:bg-blue-700">Logout</a>
+            <a href="{% url 'app_manager:dashboard' %} " class="block px-4 py-2 hover:bg-blue-700">Painel</a>
+            <a href="#" class="block px-4 py-2 hover:bg-blue-700"><strong class="text-yellow-300">Olá, {{user.username}}</strong></a>
+
         {% endif %}
     </div>
 </nav>

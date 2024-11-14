@@ -1,0 +1,55 @@
+<!-- delete_associado.html -->
+
+{% extends 'base.html' %}
+
+{% block delete_associado %}
+  <!-- Navbar -->
+  {% include "components/navbar_apapesc.html" %}
+  <div class="container mx-auto mt-8">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+
+      {% if deleted %}
+        <!-- Mensagem de sucesso -->
+        <h2 class="text-xl font-bold mb-4 text-center text-green-600">Associado excluído com sucesso!</h2>
+        <p class="mb-4 text-center">Você será redirecionado para a lista de associados em alguns segundos.</p>
+        <!-- Script para redirecionar após 5 segundos -->
+        <!-- Script para redirecionar após 5 segundos -->
+        <script>
+          setTimeout(function() {
+            window.location.href = "{% url 'app_associados:lista_associados' %}";
+          }, 5000); // Redireciona após 5000 milissegundos (5 segundos)
+        </script>
+      {% else %}
+        <h2 class="text-xl font-bold mb-4 text-center">Confirmar Exclusão</h2>
+        <p class="mb-4 text-center">Tem certeza que deseja excluir o associado <strong>{{ associado.nome }}</strong>?</p>
+
+        <!-- Exibir mais informações do associado -->
+        <div class="mb-4">
+          {% if associado.foto %}
+            <div class="flex justify-center mb-4">
+              <img src="{{ associado.foto.url }}" alt="Foto de {{ associado.nome }}" class="w-32 h-32 object-cover rounded-full">
+            </div>
+          {% endif %}
+          <ul class="text-center">
+            <li><strong>Email:</strong> {{ associado.email }}</li>
+            <li><strong>Data de Nascimento:</strong> {{ associado.data_nascimento|date:"d/m/Y" }}</li>
+            <!-- Adicione outros campos que desejar -->
+          </ul>
+        </div>
+
+        <form method="post" class="text-center">
+          {% csrf_token %}
+          <button type="submit"
+                  class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
+                  onclick="return confirm('Tem certeza que deseja deletar este associado?')">
+            Sim, excluir
+          </button>
+          <a href="{% url 'app_associados:detalhe_associado' associado.pk %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+            Cancelar
+          </a>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock delete_associado %}
+

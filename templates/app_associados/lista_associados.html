@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block lista_associados %}
+    <!-- Navbar -->
+    {% include "components/navbar_apapesc.html" %}
+<!-- Conteúdo Principal -->
+<div class="container mx-auto px-4 lg:px-6 py-6">
+<h1 class="text-3xl font-semibold text-gray-800">
+    Lista de Associados <span class="text-blue-400">Ativos</span>
+</h1>
+<a href="{% url 'app_associados:buscar_associado' %}"
+   class="text-blue-500 hover:text-gray-400 flex items-center gap-1">
+    Buscar Associado
+    <i class="material-icons" style="font-size: 18px;">search</i>
+</a>
+  <!-- Tabela de Associados -->
+  <div class="mt-6 overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full bg-white border border-gray-300 rounded-md text-sm">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-6 py-3 text-left text-gray-700">Nome</th>
+          <th class="px-6 py-3 text-left text-gray-700">Telefone</th>
+          <th class="px-6 py-3 text-left text-gray-700">CPF</th>
+          <th class="px-6 py-3 text-left text-gray-700">Gov</th>
+          <th class="px-6 py-3 text-left text-gray-700">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for associado in object_list %}
+        <tr class="even:bg-gray-50 hover:bg-gray-200 transition-colors">
+          <td class="px-6 py-3">{{ associado.nome_completo }}</td>
+          <td class="px-6 py-3">{{ associado.celular }}</td>
+          <td class="px-6 py-3">
+            <div class="flex items-center">
+              <span id="cpf-{{ associado.pk }}">{{ associado.cpf }}</span>
+              <button onclick="copyToClipboard('#cpf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+                <i class="material-icons" style="font-size: 16px;">content_copy</i>
+              </button>
+            </div>
+          </td>
+          <td class="px-6 py-3">
+            <div class="flex items-center">
+              <span id="senha-{{ associado.pk }}">{{ associado.senha_gov }}</span>
+              <button onclick="copyToClipboard('#senha-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+                <i class="material-icons" style="font-size: 16px;">content_copy</i>
+              </button>
+            </div>
+          </td>
+          <td class="px-6 py-3 text-blue-500">
+            <a href="{% url 'app_associados:detalhe_associado' pk=associado.pk %}" class="hover:text-blue-600 mr-2">
+              <i class="material-icons" style="font-size: 18px;">visibility</i>
+            </a>
+
+            <a href="#" class="hover:text-green-600" target="#">
+              <i class="material-icons" style="font-size: 18px; color:green"> phone_android</i>
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="px-6 py-3 text-center text-gray-500">Nenhum associado encontrado.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  </div>
+
+  <!-- Inclua o arquivo JavaScript externo -->
+  <script src="{% static 'js/copy_to_clipboard.js' %}"></script>
+{% endblock lista_associados %}
