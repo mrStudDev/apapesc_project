@@ -35,19 +35,22 @@ class AssociadoCreateView(LoginRequiredMixin, CreateView):
     model = AssociadoModel
     form_class = AssociadoForm
     template_name = 'app_associados/cadastrar_associado.html'
-    success_url = reverse_lazy('app_associados:detalhe_associado')
-
 
     def form_valid(self, form):
+        # Salva o objeto
         self.object = form.save()
 
+        # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            return self.render_to_response(self.get_context_data(form=form))
+            # Redireciona para a mesma página de edição
+            return redirect('app_associados:editar_associado', pk=self.object.pk)
+
+        # Caso contrário, redireciona para a página de detalhe
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
-
+        # URL de sucesso padrão para redirecionar ao detalhe
+        return reverse_lazy('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
 
 
 class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
@@ -59,14 +62,20 @@ class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
 
 
     def form_valid(self, form):
+        # Salva o objeto
         self.object = form.save()
 
+        # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            return self.render_to_response(self.get_context_data(form=form))
+            # Redireciona para a mesma página de edição
+            return redirect('app_associados:editar_associado', pk=self.object.pk)
+
+        # Caso contrário, redireciona para a página de detalhe
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
+        # URL de sucesso padrão para redirecionar ao detalhe
+        return reverse_lazy('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
 
 
 

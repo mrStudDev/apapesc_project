@@ -533,7 +533,10 @@
 
               </div>
               <br>
-              <button type="submit" name="save_and_continue" value="1"  class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">Atualizar...</button>
+                            <!-- Botão atualizar -->
+            <button type="submit" name="save_and_continue" value="1" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Atualizar e Continuar Editando
+            </button>
             </div>
             <div class="mb-4">
               <label for="{{ form.municipio_circunscricao.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
@@ -615,9 +618,8 @@
           <a href="{% url 'app_associados:lista_associados' %}" class="text-blue-500 hover:underline">
             Cancelar
           </a>
-          <button type="submit"
-                  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Editar e salvar
+          <button type="submit" name="save_and_view" value="1" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+              Salvar e Visualizar
           </button>
         </div>
       </form>
