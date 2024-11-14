@@ -23,11 +23,6 @@
     <a href="{% url 'app_associados:editar_associado' associado.id %}" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600">
       Editar Associado
     </a>
-
-    <a href="{% url 'app_associados:deletar_associado' associado.id %}"
-       class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">
-      Deletar Associado
-    </a>
   </div>
 
   <!-- Seção: Informações Pessoais -->
@@ -39,7 +34,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Nome:</strong>
         <span id="nome-{{ associado.pk }}" class="ml-2">{{ associado.nome_completo }}</span>
-        <button onclick="copyToClipboard('#nome-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('nome-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -48,7 +43,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Telefone:</strong>
         <span id="telefone-{{ associado.pk }}" class="ml-2">{{ associado.celular }}</span>
-        <button onclick="copyToClipboard('#telefone-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('telefone-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -57,7 +52,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">CPF:</strong>
         <span id="cpf-{{ associado.pk }}" class="ml-2">{{ associado.cpf }}</span>
-        <button onclick="copyToClipboard('#cpf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('cpf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -66,7 +61,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Email:</strong>
         <span id="email-{{ associado.pk }}" class="ml-2">{{ associado.email }}</span>
-        <button onclick="copyToClipboard('#email-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('email-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -75,7 +70,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Data de Nascimento:</strong>
         <span id="data_nascimento-{{ associado.pk }}" class="ml-2">{{ associado.data_nascimento|date:"d/m/Y"  }}</span>
-        <button onclick="copyToClipboard('#data_nascimento-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('data_nascimento-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -90,7 +85,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Nome da Mae:</strong>
         <span id="nome_mae-{{ associado.pk }}" class="ml-2">{{ associado.nome_mae  }}</span>
-        <button onclick="copyToClipboard('#nome_mae-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('nome_mae-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -99,7 +94,7 @@
       <div class="mb-4 flex items-center">
         <strong class="w-28 text-gray-700">Nome da Pai:</strong>
         <span id="nome_pai-{{ associado.pk }}" class="ml-2">{{ associado.nome_pai  }}</span>
-        <button onclick="copyToClipboard('#nome_pai-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <button onclick="copyToClipboard('nome_pai-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
@@ -115,7 +110,7 @@
     <div class="mb-4 flex items-center">
       <strong>RG Número:</strong>
       <span id="rg-numero-{{ associado.pk }}" class="ml-2">{{ associado.rg_numero }}</span>
-      <button onclick="copyToClipboard('#rg-numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rg-numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -123,7 +118,7 @@
     <div class="mb-4 flex items-center">
       <strong>Órgão Expeditor (RG):</strong>
       <span id="rg-orgao-{{ associado.pk }}" class="ml-2">{{ associado.rg_orgao }}</span>
-      <button onclick="copyToClipboard('#rg-orgao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rg-orgao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -131,7 +126,7 @@
     <div class="mb-4 flex items-center">
       <strong>Data de Emissão (RG):</strong>
       <span id="rg-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.rg_data_emissao|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#rg-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rg-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -139,7 +134,7 @@
     <div class="mb-4 flex items-center">
       <strong>Naturalidade:</strong>
       <span id="naturalidade-{{ associado.pk }}" class="ml-2">{{ associado.naturalidade }}</span>
-      <button onclick="copyToClipboard('#naturalidade-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('naturalidade-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -154,21 +149,21 @@
     <div class="mb-4 flex items-center">
       <strong>NIT:</strong>
       <span id="nit-{{ associado.pk }}" class="ml-2">{{ associado.nit }}</span>
-      <button onclick="copyToClipboard('#nit-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('nit-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>PIS:</strong>
       <span id="pis-{{ associado.pk }}" class="ml-2">{{ associado.pis }}</span>
-      <button onclick="copyToClipboard('#pis-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('pis-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Título de Eleitor:</strong>
       <span id="titulo-eleitor-{{ associado.pk }}" class="ml-2">{{ associado.titulo_eleitor }}</span>
-      <button onclick="copyToClipboard('#titulo-eleitor-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('titulo-eleitor-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -182,28 +177,28 @@
     <div class="mb-4 flex items-center">
       <strong>RGP:</strong>
       <span id="rgp-{{ associado.pk }}" class="ml-2">{{ associado.rgp }}</span>
-      <button onclick="copyToClipboard('#rgp-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rgp-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Data de Emissão (RGP):</strong>
       <span id="rgp-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.rgp_data_emissao|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#rgp-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rgp-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Primeiro Registro:</strong>
       <span id="primeiro-registro-{{ associado.pk }}" class="ml-2">{{ associado.primeiro_registro|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#primeiro-registro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('primeiro-registro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>MPA (RGP):</strong>
       <span id="rgp-mpa-{{ associado.pk }}" class="ml-2">{{ associado.rgp_mpa }}</span>
-      <button onclick="copyToClipboard('#rgp-mpa-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('rgp-mpa-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -217,28 +212,28 @@
     <div class="mb-4 flex items-center">
       <strong>CTPS:</strong>
       <span id="ctps-{{ associado.pk }}" class="ml-2">{{ associado.ctps }}</span>
-      <button onclick="copyToClipboard('#ctps-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('ctps-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Série CTPS:</strong>
       <span id="ctps-serie-{{ associado.pk }}" class="ml-2">{{ associado.ctps_serie }}</span>
-      <button onclick="copyToClipboard('#ctps-serie-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('ctps-serie-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Data de Emissão (CTPS):</strong>
       <span id="ctps-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.ctps_data_emissao|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#ctps-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('ctps-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>UF CTPS:</strong>
       <span id="ctps-uf-{{ associado.pk }}" class="ml-2">{{ associado.ctps_uf }}</span>
-      <button onclick="copyToClipboard('#ctps-uf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('ctps-uf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -252,14 +247,14 @@
     <div class="mb-4 flex items-center">
       <strong>CNH:</strong>
       <span id="cnh-{{ associado.pk }}" class="ml-2">{{ associado.cnh }}</span>
-      <button onclick="copyToClipboard('#cnh-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('cnh-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Data de Emissão (CNH):</strong>
       <span id="cnh-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.cnh_data_emissao|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#cnh-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('cnh-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -273,49 +268,49 @@
     <div class="mb-4 flex items-center">
       <strong>Logradouro:</strong>
       <span id="logradouro-{{ associado.pk }}" class="ml-2">{{ associado.logradouro }}</span>
-      <button onclick="copyToClipboard('#logradouro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('logradouro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Bairro:</strong>
       <span id="bairro-{{ associado.pk }}" class="ml-2">{{ associado.bairro }}</span>
-      <button onclick="copyToClipboard('#bairro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('bairro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Número:</strong>
       <span id="numero-{{ associado.pk }}" class="ml-2">{{ associado.numero }}</span>
-      <button onclick="copyToClipboard('#numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Complemento:</strong>
       <span id="complemento-{{ associado.pk }}" class="ml-2">{{ associado.complemento }}</span>
-      <button onclick="copyToClipboard('#complemento-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('complemento-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>CEP:</strong>
       <span id="cep-{{ associado.pk }}" class="ml-2">{{ associado.cep }}</span>
-      <button onclick="copyToClipboard('#cep-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('cep-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Município:</strong>
       <span id="municipio-{{ associado.pk }}" class="ml-2">{{ associado.municipio }}</span>
-      <button onclick="copyToClipboard('#municipio-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('municipio-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>UF:</strong>
       <span id="uf-{{ associado.pk }}" class="ml-2">{{ associado.uf }}</span>
-      <button onclick="copyToClipboard('#uf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('uf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -329,14 +324,14 @@
     <div class="mb-4 flex items-center">
       <strong>Usuário Gov:</strong>
       <span id="user-gov-{{ associado.pk }}" class="ml-2">{{ associado.user_gov }}</span>
-      <button onclick="copyToClipboard('#user-gov-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('user-gov-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Senha Gov:</strong>
       <span id="senha-gov-{{ associado.pk }}" class="ml-2">{{ associado.senha_gov }}</span>
-      <button onclick="copyToClipboard('#senha-gov-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('senha-gov-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -350,7 +345,7 @@
     <div class="mb-4 flex items-center">
       <strong>Data da Filiação:</strong>
       <span id="data-cadastro-{{ associado.pk }}" class="ml-2">{{ associado.data_cadastro|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('#data-cadastro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('data-cadastro-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -361,7 +356,7 @@
     <div class="mb-4 flex items-center">
       <strong>Circunscrição - Área de Atuação</strong>
       <span id="municipio_circunscricao-{{ associado.pk }}" class="ml-2">{{ associado.municipio_circunscricao }}</span>
-      <button onclick="copyToClipboard('#municipio_circunscricao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+      <button onclick="copyToClipboard('municipio_circunscricao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
         <i class="material-icons" style="font-size: 16px;">content_copy</i>
       </button>
     </div>
@@ -399,15 +394,7 @@
   </div>
   </div>
 
-    <script>
-      // Função para copiar texto para a área de transferência
-      function copyToClipboard(elementId) {
-        var text = document.querySelector(elementId).textContent;
-        navigator.clipboard.writeText(text).then(function() {
-          alert("Texto copiado: " + text); // Opcional: pode remover o alert e adicionar um feedback visual.
-        }).catch(function(err) {
-          alert("Erro ao copiar: " + err);
-        });
-      }
-    </script>
+  <!-- Inclua o arquivo JavaScript externo -->
+  <script src="{% static 'js/copy_to_clipboard.js' %}"></script>
+
 {% endblock detail_associados %}

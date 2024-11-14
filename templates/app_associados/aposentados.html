@@ -33,7 +33,7 @@
               <td class="px-6 py-3">
                 <div class="flex items-center">
                   <span id="cpf-{{ associado.pk }}">{{ associado.cpf }}</span>
-                  <button onclick="copyToClipboard('#cpf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+                  <button onclick="copyToClipboard('cpf-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
                     <i class="material-icons" style="font-size: 16px;">content_copy</i>
                   </button>
                 </div>
@@ -41,7 +41,7 @@
               <td class="px-6 py-3">
                 <div class="flex items-center">
                   <span id="senha-{{ associado.pk }}">{{ associado.senha_gov }}</span>
-                  <button onclick="copyToClipboard('#senha-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+                  <button onclick="copyToClipboard('senha-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
                     <i class="material-icons" style="font-size: 16px;">content_copy</i>
                   </button>
                 </div>
