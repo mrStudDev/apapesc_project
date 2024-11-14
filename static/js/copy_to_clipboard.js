@@ -1,11 +1,13 @@
-// static/js/copy_to_clipboard.js
-
 // Função para copiar texto para a área de transferência
 function copyToClipboard(elementId) {
-  var text = document.querySelector(elementId).textContent;
+  // Seleciona o texto do elemento usando o ID
+  var text = document.getElementById(elementId).textContent;
+
+  // Usa a API de área de transferência para copiar o texto
   navigator.clipboard.writeText(text).then(function() {
-    alert("Texto copiado: " + text); // Opcional: você pode remover o alert e adicionar um feedback visual.
+    alert("Texto copiado: " + text); // Feedback opcional
   }).catch(function(err) {
-    alert("Erro ao copiar: " + err);
+    console.error("Erro ao copiar: ", err);
+    alert("Erro ao copiar o texto."); // Alerta em caso de erro
   });
 }
