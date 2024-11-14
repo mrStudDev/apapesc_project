@@ -30,23 +30,24 @@ class AssociadoDetailView(LoginRequiredMixin, DetailView):
         context['reparticao'] = self.object.reparticao
         return context
 
+
 class AssociadoCreateView(LoginRequiredMixin, CreateView):
     model = AssociadoModel
     form_class = AssociadoForm
     template_name = 'app_associados/cadastrar_associado.html'
     success_url = reverse_lazy('app_associados:detalhe_associado')
 
+
     def form_valid(self, form):
-        # Salva o objeto
         self.object = form.save()
 
-        # Verifica se o botão "Salvar e Continuar" foi pressionado
         if "save_and_continue" in self.request.POST:
-            # Recarrega a mesma página com os dados preenchidos no formulário
             return self.render_to_response(self.get_context_data(form=form))
-
-        # Caso contrário, redireciona para a URL padrão
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
+
 
 
 class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
@@ -56,22 +57,18 @@ class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('app_associados:detalhe_associado')
     context_object_name = 'associado'
 
-    # Redireciona para a página de detalhe após a edição
+
     def form_valid(self, form):
-        # Salva o objeto
         self.object = form.save()
 
-        # Verifica se o botão "Salvar e Continuar" foi pressionado
         if "save_and_continue" in self.request.POST:
-            # Recarrega a mesma página com os dados preenchidos no formulário
             return self.render_to_response(self.get_context_data(form=form))
-
-        # Caso contrário, redireciona para a URL padrão
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Redireciona para a página de detalhes do associado com o `pk` do objeto atualizado
         return reverse('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
+
+
 
 class AssociadoDeleteView(LoginRequiredMixin, DeleteView):
     model = AssociadoModel

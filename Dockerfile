@@ -11,6 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiando o código do projeto
 COPY . .
 
+# Coletando os arquivos estáticos
+RUN python manage.py collectstatic --noinput
+
 # Expondo a porta 8000
 EXPOSE 8000
 
