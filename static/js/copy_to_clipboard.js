@@ -1,13 +1,26 @@
-// Função para copiar texto para a área de transferência
+// static/js/copy_to_clipboard.js
+
 function copyToClipboard(elementId) {
-  // Seleciona o texto do elemento usando o ID
   var text = document.getElementById(elementId).textContent;
 
-  // Usa a API de área de transferência para copiar o texto
-  navigator.clipboard.writeText(text).then(function() {
-    alert("Texto copiado: " + text); // Feedback opcional
-  }).catch(function(err) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed"; // Evita rolagem da página
+  textArea.style.left = "-9999px";
+  document.body.appendChild(textArea);
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    if (successful) {
+      alert("Texto copiado: " + text);
+    } else {
+      alert("Falha ao copiar o texto.");
+    }
+  } catch (err) {
     console.error("Erro ao copiar: ", err);
-    alert("Erro ao copiar o texto."); // Alerta em caso de erro
-  });
+    alert("Erro ao copiar o texto.");
+  }
+
+  document.body.removeChild(textArea);
 }
