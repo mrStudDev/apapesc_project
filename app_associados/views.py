@@ -8,6 +8,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from app_documentos.models import Documento
 
 class AssociadosListView(LoginRequiredMixin, ListView):
     model = AssociadoModel
@@ -28,6 +29,7 @@ class AssociadoDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reparticao'] = self.object.reparticao
+        context['documentos'] = Documento.objects.filter(associado=self.object)
         return context
 
 

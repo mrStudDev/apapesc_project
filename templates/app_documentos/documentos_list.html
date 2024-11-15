@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block documentos_list %}
+<div class="min-h-screen flex">
+
+  {% include 'components/aside_nav.html' %}
+
+  <!-- Conteúdo Principal -->
+  <div class="flex-1 p-8">
+    <div class="container mx-auto bg-white rounded-lg shadow-md p-8">
+      <!-- Header com título e botão de adicionar -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Lista de Documentos</h1>
+        <a href="{% url 'app_documentos:upload_documento' %}"
+           class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+          + Adicionar Documento
+        </a>
+      </div>
+
+      <!-- Tabela de Documentos -->
+      <table class="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2">Nome</th>
+            <th class="border border-gray-300 px-4 py-2">Associado</th>
+            <th class="border border-gray-300 px-4 py-2">Descrição</th>
+            <th class="border border-gray-300 px-4 py-2">Data de Upload</th>
+            <th class="border border-gray-300 px-4 py-2">Arquivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for documento in documentos %}
+            <tr class="hover:bg-gray-100">
+              <td class="border border-gray-300 px-4 py-2">{{ documento.nome }}</td>
+              <td class="border border-gray-300 px-4 py-2">
+                <a href="{% url 'app_associados:associado_detail' documento.associado.id %}"
+                   class="text-blue-500 hover:underline">
+                  {{ documento.associado.nome_completo }}
+                </a>
+              </td>
+              <td class="border border-gray-300 px-4 py-2">{{ documento.descricao }}</td>
+              <td class="border border-gray-300 px-4 py-2">
+                {{ documento.data_upload|date:"d/m/Y H:i" }}
+              </td>
+              <td class="border border-gray-300 px-4 py-2">
+                <a href="{{ documento.arquivo.url }}" target="_blank" class="text-blue-500 hover:underline">
+                  Ver Arquivo
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center text-gray-600 py-4">
+                Nenhum documento encontrado.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock documentos_list %}
+

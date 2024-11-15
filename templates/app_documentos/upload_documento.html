@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block upload_documentos %}
+  {% include "components/navbar_apapesc.html" %}
+
+<div class="min-h-screen flex bg-gray-100">
+      <!-- Conteúdo Principal -->
+  <div class="flex-1 flex items-center justify-center p-6">
+    <div class="w-full sm:w-3/4 lg:w-1/2 bg-white rounded-lg shadow-md p-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Upload de Documentos</h1>
+    {% if associado %}
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Associado</label>
+            <p class="text-gray-800 font-semibold text-lg">{{ associado.nome_completo }}</p>
+        </div>
+    {% endif %}
+
+    <!-- Formulário de upload de documento -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Tipo do Documento -->
+        <p>Selecione um tipo de documento:  RG, CPF, CNH etc.</p><br>
+        <p>Caso não encontre o tipo (nome) desejado, escolha a opção <strong class="font-semibold">Nomear documento...</strong></p>
+        <br>
+        <div class="mb-4">
+            {{ form.tipo_doc.label_tag }}
+            {{ form.tipo_doc }}
+        </div>
+
+        <!-- Nome do Documento (aparece somente se `Dar outro nome` for selecionado) -->
+        <div class="mb-4">
+            {{ form.nome.label_tag }}
+            {{ form.nome }}
+        </div>
+
+        <!-- Descrição -->
+        <div class="mb-4">
+            {{ form.descricao.label_tag }}
+            {{ form.descricao }}
+        </div>
+
+        <!-- Arquivo -->
+        <div class="mb-4">
+            {{ form.arquivo.label_tag }}
+            {{ form.arquivo }}
+        </div>
+
+        <!-- Botão de Enviar -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Enviar Documento
+        </button>
+    </form>
+</div>
+
+  </div>
+
+  <script src="{% static 'js/upload_documentos.js' %}"></script>
+{% endblock upload_documentos %}

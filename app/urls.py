@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('app_home.urls')),
     path('manager/', include('app_manager.urls')),
     path('associados/', include('app_associados.urls')),
+    path('documentos/', include('app_documentos.urls')),
 
 ]
 

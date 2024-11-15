@@ -7,7 +7,11 @@ WORKDIR /app
 # Copiando os requisitos e instalando dependências
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libreoffice \
+    unoconv \
+    python3-uno \
+    && rm -rf /var/lib/apt/lists/*
 # Copiando o código do projeto
 COPY . .
 

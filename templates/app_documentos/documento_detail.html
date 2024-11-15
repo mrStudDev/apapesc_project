@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block documento_detail %}
+  <!-- Sidebar (como componente incluído) -->
+  {% include "components/navbar_apapesc.html" %}
+<div class="min-h-screen flex">
+
+  <!-- Conteúdo Principal -->
+  <div class="flex-1 p-8">
+    <div class="container mx-auto bg-white rounded-lg shadow-md p-8">
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">Dados do Documento</h1>
+
+      <div class="space-y-4">
+        <p><strong>Nome do Documento:</strong> {{ documento.nome }}</p>
+        <p><strong>Proprietário do Documento:</strong>
+          <a href="{% url 'app_associados:detalhe_associado' documento.associado.id %}"
+             class="text-blue-500 hover:underline">
+            {{ documento.associado.nome_completo }}
+          </a>
+        </p>
+        <p><strong>Data de Upload:</strong> {{ documento.data_upload|date:"d/m/Y H:i" }}</p>
+        <p><strong>Extensão do Documento:</strong> <span class="inline-flex items-center px-8 py-0.5 rounded text-xs font-medium bg-gray-500 text-white">
+          {{ documento.arquivo.url|slice:"-3:" }}
+        </span></p>
+
+        <p><strong>Descrição:</strong> {{ documento.descricao }}</p>
+
+      <div class="mt-4 space-x-4"> <!-- Espaçamento entre os botões -->
+        <a href="{{ documento.arquivo.url }}" target="_blank"
+           class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
+          <i class="material-icons mr-2">file_open</i> <!-- Ícone para "Abrir Documento" -->
+          Abrir Documento
+        </a>
+
+        <a href="{% url 'app_associados:detalhe_associado' documento.associado.id %}"
+           class="inline-flex items-center bg-green-500 hover:bg-green-700 text-white font-medium py-2 px-4 rounded">
+          <i class="material-icons mr-2">person</i> <!-- Ícone para "Página Associado" -->
+          Página Associado
+        </a>
+      </div>
+        <hr>
+      </div>
+      <br>
+      <p>Você pode criar uma cópia desse documento em : <strong>PDF</strong> </p>
+      <br>
+      <p>
+        Ao clicar no botão e após a sua confirmação, uma cópia será anexada
+        à lista de documentos do associado <small class="underline">{{ documento.associado.nome_completo }}</small>
+      </p>
+      <p>
+        O ducmuneto receberá o mesmo nome e estará identificado na descrição do docmumento como: <small class="font-bold">Cópia PDF </small>
+      </p>
+
+      <div class="mt-4">
+          <button onclick="criarCopiaPDF({{ documento.id }})"
+                  class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">
+              Criar Cópia em PDF
+          </button>
+      </div>
+
+    </div>
+  </div>
+  <!-- Inclui o CSRF token para JavaScript -->
+  <script>
+      const csrfToken = '{{ csrf_token }}';
+  </script>
+  <script src="{% static 'js/criar_pdf.js' %}"></script>
+
+</div>
+{% endblock documento_detail %}
+
+

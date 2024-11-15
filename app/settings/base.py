@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'app_home',
     'app_manager',
     'app_associados',
+    'app_documentos',
 ]
 SITE_ID = 1
 

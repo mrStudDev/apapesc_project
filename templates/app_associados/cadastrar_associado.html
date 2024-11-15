@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block cadastro_associados %}
     <!-- Navbar -->
     {% include "components/navbar_apapesc.html" %}
-<div class="min-h-screen flex bg-gray-100">
 
+<div class="min-h-screen flex bg-gray-100">
   <!-- Conteúdo Principal -->
   <div class="flex-1 flex items-center justify-center p-6">
     <div class="w-full sm:w-3/4 lg:w-1/2 bg-white rounded-lg shadow-md p-8">
@@ -626,6 +627,9 @@
     </div>
   </div>
 </div>
+
+  <!-- Footer -->
+  {% include "components/footer_apapesc.html" %}
 
 {% block extra_js %}
   <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
