@@ -16,20 +16,32 @@
 <div class="container mx-auto py-6 px-4 max-w-5xl">
 
     <!-- Links de Ações -->
-    <div class="flex justify-center space-x-2 mb-4">
-      <a href="{% url 'app_associados:lista_associados' %}"
-         class="bg-gray-500 text-white text-sm py-1 px-3 rounded-md hover:bg-blue-600">
-        Lista
-      </a>
-      <a href="{% url 'app_associados:editar_associado' associado.id %}"
-         class="bg-gray-500 text-white text-sm py-1 px-3 rounded-md hover:bg-yellow-600">
-        Editar
-      </a>
-      <a href="{% url 'app_documentos:upload_documento' associado.id %}"
-         class="bg-gray-500 text-white text-sm py-1 px-3 rounded-md hover:bg-green-600">
-        Upload
-      </a>
-    </div>
+<div class="flex justify-center space-x-2 mb-4">
+    <!-- Botão Lista -->
+    <a href="{% url 'app_associados:lista_associados' %}"
+       class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-blue-300"
+       title="Lista de Associados">
+        <i class="material-icons" style="font-size: 24px; color:blue">list</i>
+        <span class="sr-only">Lista</span> Lista
+    </a>
+
+    <!-- Botão Editar -->
+    <a href="{% url 'app_associados:editar_associado' associado.id %}"
+       class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-yellow-400"
+       title="Editar Associado">
+        <i class="material-icons" style="font-size: 24px; color:blue">edit</i>
+        <span class="sr-only">Editar</span> Editar
+    </a>
+
+    <!-- Botão Upload -->
+    <a href="{% url 'app_documentos:upload_documento' associado.id %}"
+       class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-green-400"
+       title="Upload de Documento">
+        <i class="material-icons" style="font-size: 24px; color:blue">upload_file</i>
+        <span class="sr-only">Upload</span> Upload Doc
+    </a>
+</div>
+
 
   <!-- Seção: Informações Pessoais -->
   <div class="bg-white p-6 rounded-lg shadow-md mb-6">
@@ -104,77 +116,84 @@
           <i class="material-icons" style="font-size: 16px;">content_copy</i>
         </button>
       </div>
-
+        <div class="mb-4 flex items-center">
+          <strong>Estado Civil:</strong>
+          <span id="estado_civil-{{ associado.pk }}" class="ml-2">{{ associado.estado_civil }}</span>
+        </div>
+              <div class="mb-4 flex items-center">
+          <strong>Profissao:</strong>
+          <span id="profissao-{{ associado.pk }}" class="ml-2">{{ associado.profissao }}</span>
+        </div>
     </div>
   </div>
 
 
-<!-- Seção: Documentos -->
-<div class="bg-white p-6 rounded-lg shadow-md mb-6">
-  <h2 class="text-2xl font-semibold text-gray-700 mb-6">Documentos - RG</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    <div class="mb-4 flex items-center">
-      <strong>RG Número:</strong>
-      <span id="rg-numero-{{ associado.pk }}" class="ml-2">{{ associado.rg_numero }}</span>
-      <button onclick="copyToClipboard('rg-numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
+    <!-- Seção: Documentos -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">Documentos - RG</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="mb-4 flex items-center">
+          <strong>RG Número:</strong>
+          <span id="rg-numero-{{ associado.pk }}" class="ml-2">{{ associado.rg_numero }}</span>
+          <button onclick="copyToClipboard('rg-numero-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+
+        <div class="mb-4 flex items-center">
+          <strong>Órgão Expeditor (RG):</strong>
+          <span id="rg-orgao-{{ associado.pk }}" class="ml-2">{{ associado.rg_orgao }}</span>
+          <button onclick="copyToClipboard('rg-orgao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+
+        <div class="mb-4 flex items-center">
+          <strong>Data de Emissão (RG):</strong>
+          <span id="rg-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.rg_data_emissao|date:"d/m/Y" }}</span>
+          <button onclick="copyToClipboard('rg-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+
+        <div class="mb-4 flex items-center">
+          <strong>Naturalidade:</strong>
+          <span id="naturalidade-{{ associado.pk }}" class="ml-2">{{ associado.naturalidade }}</span>
+          <button onclick="copyToClipboard('naturalidade-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="mb-4 flex items-center">
-      <strong>Órgão Expeditor (RG):</strong>
-      <span id="rg-orgao-{{ associado.pk }}" class="ml-2">{{ associado.rg_orgao }}</span>
-      <button onclick="copyToClipboard('rg-orgao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
-    </div>
 
-    <div class="mb-4 flex items-center">
-      <strong>Data de Emissão (RG):</strong>
-      <span id="rg-data-emissao-{{ associado.pk }}" class="ml-2">{{ associado.rg_data_emissao|date:"d/m/Y" }}</span>
-      <button onclick="copyToClipboard('rg-data-emissao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
+    <!-- Seção: Documentos Cidadão -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-2xl font-semibold text-gray-700 mb-4">Documentos do Cidadão</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="mb-4 flex items-center">
+          <strong>NIT:</strong>
+          <span id="nit-{{ associado.pk }}" class="ml-2">{{ associado.nit }}</span>
+          <button onclick="copyToClipboard('nit-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+        <div class="mb-4 flex items-center">
+          <strong>PIS:</strong>
+          <span id="pis-{{ associado.pk }}" class="ml-2">{{ associado.pis }}</span>
+          <button onclick="copyToClipboard('pis-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+        <div class="mb-4 flex items-center">
+          <strong>Título de Eleitor:</strong>
+          <span id="titulo-eleitor-{{ associado.pk }}" class="ml-2">{{ associado.titulo_eleitor }}</span>
+          <button onclick="copyToClipboard('titulo-eleitor-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+            <i class="material-icons" style="font-size: 16px;">content_copy</i>
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-4 flex items-center">
-      <strong>Naturalidade:</strong>
-      <span id="naturalidade-{{ associado.pk }}" class="ml-2">{{ associado.naturalidade }}</span>
-      <button onclick="copyToClipboard('naturalidade-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
-    </div>
-  </div>
-</div>
-
-
-<!-- Seção: Documentos Cidadão -->
-<div class="bg-white p-6 rounded-lg shadow-md mb-6">
-  <h2 class="text-2xl font-semibold text-gray-700 mb-4">Documentos do Cidadão</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    <div class="mb-4 flex items-center">
-      <strong>NIT:</strong>
-      <span id="nit-{{ associado.pk }}" class="ml-2">{{ associado.nit }}</span>
-      <button onclick="copyToClipboard('nit-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
-    </div>
-    <div class="mb-4 flex items-center">
-      <strong>PIS:</strong>
-      <span id="pis-{{ associado.pk }}" class="ml-2">{{ associado.pis }}</span>
-      <button onclick="copyToClipboard('pis-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
-    </div>
-    <div class="mb-4 flex items-center">
-      <strong>Título de Eleitor:</strong>
-      <span id="titulo-eleitor-{{ associado.pk }}" class="ml-2">{{ associado.titulo_eleitor }}</span>
-      <button onclick="copyToClipboard('titulo-eleitor-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
-    </div>
-  </div>
-</div>
 
 <!-- Seção: Documentação Profissional -->
 <div class="bg-white p-6 rounded-lg shadow-md mb-6">
@@ -356,23 +375,97 @@
       </button>
     </div>
     <div class="mb-4 flex items-center">
-      <strong>Vinculado à Repartição</strong>
+      <strong>Vinculado à Repartição:</strong>
       <span id="nome-reparticao-{{ associado.pk }}" class="ml-2">{{ associado.reparticao }}</span>
     </div>
     <div class="mb-4 flex items-center">
-      <strong>Circunscrição - Área de Atuação</strong>
+      <strong>Circunscrição - Área de Atuação:</strong>
       <span id="municipio_circunscricao-{{ associado.pk }}" class="ml-2">{{ associado.municipio_circunscricao }}</span>
-      <button onclick="copyToClipboard('municipio_circunscricao-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
-        <i class="material-icons" style="font-size: 16px;">content_copy</i>
-      </button>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Delegado / Responsãvel:</strong>
-      <span id="status-{{ associado.pk }}" class="ml-2">{{ reparticao.delegado_responsavel }}</span>
+      <span id="delegado_responsavel-{{ associado.pk }}" class="ml-2">{{ reparticao.delegado_responsavel }}</span>
     </div>
     <div class="mb-4 flex items-center">
       <strong>Status de atividade do Associado:</strong>
       <span id="status-{{ associado.pk }}" class="ml-2">{{ associado.status }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Seção: Produção Anual -->
+<div class="bg-white p-6 rounded-lg shadow-md mb-6">
+  <h2 class="text-2xl font-semibold text-gray-700 mb-4">Produção Média Anual</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div class="mb-4 flex items-center">
+      <strong>Espécie 1:</strong>
+      <span id="especie1-{{ associado.pk }}" class="ml-2">{{ associado.especie1}}</span>
+      <button onclick="copyToClipboard('especie1-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Quantidade 1:</strong>
+      <span id="quantidade1-{{ associado.pk }}" class="ml-2">{{ quantidade1 }}</span>
+      <button onclick="copyToClipboard('quantidade1-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Espécie 2:</strong>
+      <span id="especie2-{{ associado.pk }}" class="ml-2">{{ associado.especie2}}</span>
+      <button onclick="copyToClipboard('especie2-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Quantidade 2:</strong>
+      <span id="quantidade1-{{ associado.pk }}" class="ml-2">{{ quantidade2 }}</span>
+      <button onclick="copyToClipboard('quantidade2-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Espécie 3:</strong>
+      <span id="especie3-{{ associado.pk }}" class="ml-2">{{ associado.especie3}}</span>
+      <button onclick="copyToClipboard('especie3-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Quantidade 3:</strong>
+      <span id="quantidade1-{{ associado.pk }}" class="ml-2">{{ quantidade3 }}</span>
+      <button onclick="copyToClipboard('quantidade3-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Espécie 4:</strong>
+      <span id="especie4-{{ associado.pk }}" class="ml-2">{{ associado.especie4}}</span>
+      <button onclick="copyToClipboard('especie4-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+    <div class="mb-4 flex items-center">
+      <strong>Quantidade 4:</strong>
+      <span id="quantidade1-{{ associado.pk }}" class="ml-2">{{ quantidade4 }}</span>
+      <button onclick="copyToClipboard('quantidade4-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+    </div>
+      <div class="mb-4 flex items-center">
+      <strong>Espécie 5:</strong>
+      <span id="especie5-{{ associado.pk }}" class="ml-2">{{ associado.especie5}}</span>
+      <button onclick="copyToClipboard('especie5-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
+      </div>
+    <div class="mb-4 flex items-center">
+      <strong>Quantidade 5:</strong>
+      <span id="quantidade1-{{ associado.pk }}" class="ml-2">{{ quantidade5 }}</span>
+      <button onclick="copyToClipboard('quantidade5-{{ associado.pk }}')" class="ml-2 text-gray-600 hover:text-gray-800">
+        <i class="material-icons" style="font-size: 16px;">content_copy</i>
+      </button>
     </div>
   </div>
 </div>
@@ -430,25 +523,119 @@
       {% endif %}
     </div>
 
-    <!-- Links de Ações -->
+    <!-- Seção: Automação e Geração de Declarações-->
+    <div class="flex flex-col items-center space-y-6 mb-6">
+        <h2 class="text-2xl font-bold text-gray-700 mb-4">GERAR DECLARAÇÕES</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl">
+            <!-- Declaração de Filiação -->
+            <a href="{% url 'app_automacoes:gerar_declaracao_filiado' associado.id %}"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Declaração de Filiação</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a declaração.</p>
+                </div>
+            </a>
+
+            <!-- Declaração de Atividade Pesqueira -->
+            <a href="{% url 'app_automacoes:gerar_declaracao_atividade_pesqueira' associado.id %}"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Declaração de Atividade Pesqueira</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a declaração.</p>
+                </div>
+            </a>
+
+            <!-- Declaração de Residência -->
+            <a href="{% url 'app_automacoes:gerar_declaracao_residencia' associado.id %}"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Declaração de Residência</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a declaração.</p>
+                </div>
+            </a>
+
+            <!-- Declaração de Hipossuficiência -->
+            <a href="{% url 'app_automacoes:gerar_declaracao_hipo' associado.id %}"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Declaração de Hipossuficiência</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a declaração.</p>
+                </div>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl">
+            <!-- Procuração Jurídica -->
+            <a href="{% url 'app_automacoes:gerar_procuracao_juridica' associado.id %}"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Procuração Jurídica</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a procuração.</p>
+                </div>
+            </a>
+
+            <!-- Termo de Compromisso -->
+            <a href=""
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Termo de Compromisso</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar o termo de compromisso.</p>
+                </div>
+            </a>
+
+            <!-- Certificado de Registro-->
+            <a href=""
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Certificado de Registro</h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar o certificado de registro.</p>
+                </div>
+            </a>
+
+            <!-- Alguma Certificação -->
+            <a href="#"
+               class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transform hover:bg-gray-200 transition-all duration-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Alguma Certificação </h3>
+                    <p class="text-sm text-gray-600 mt-2">Clique aqui para gerar a declaração.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+      <!-- Links de Ações -->
     <div class="flex justify-center space-x-2 mb-4">
-      <a href="{% url 'app_associados:lista_associados' %}"
-         class="bg-blue-500 text-white text-sm py-1 px-3 rounded-md hover:bg-blue-600">
-        Voltar
-      </a>
-      <a href="{% url 'app_associados:editar_associado' associado.id %}"
-         class="bg-gray-500 text-white text-sm py-1 px-3 rounded-md hover:bg-yellow-600">
-        Editar
-      </a>
-      <a href="{% url 'app_documentos:upload_documento' associado.id %}"
-         class="bg-gray-500 text-white text-sm py-1 px-3 rounded-md hover:bg-yellow-600">
-        Upload
-      </a>
-      <a href="#"
-         class="bg-red-500 text-white text-sm py-1 px-3 rounded-md hover:bg-red-700"
-         onclick="return confirm('Tem certeza que deseja deletar este associado?')">
-        Deletar
-      </a>
+        <!-- Botão Lista -->
+        <a href="{% url 'app_associados:lista_associados' %}"
+           class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-blue-300"
+           title="Lista de Associados">
+            <i class="material-icons" style="font-size: 24px; color:blue">list</i>
+            <span class="sr-only">Lista</span> Lista
+        </a>
+
+        <!-- Botão Editar -->
+        <a href="{% url 'app_associados:editar_associado' associado.id %}"
+           class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-yellow-400"
+           title="Editar Associado">
+            <i class="material-icons" style="font-size: 24px; color:blue">edit</i>
+            <span class="sr-only">Editar</span> Editar
+        </a>
+
+        <!-- Botão Upload -->
+        <a href="{% url 'app_documentos:upload_documento' associado.id %}"
+           class="flex items-center justify-center bg-gray-200 text-blue-500 py-2 px-3 rounded-md hover:bg-green-400"
+           title="Upload de Documento">
+            <i class="material-icons" style="font-size: 24px; color:blue">upload_file</i>
+            <span class="sr-only">Upload</span> Upload Doc
+        </a>
+
+          <a href="{% url 'app_associados:deletar_associado' associado.pk %}"
+           class="flex items-center justify-center bg-red-500 text-white py-2 px-3 rounded-md hover:bg-red-600"
+           title="Upload de Documento">
+            <i class="material-icons" style="font-size: 24px; color:white">delete</i>
+            <span class="sr-only">Dletar Associado</span> Deletar Associado
+        </a>
     </div>
 
   </div>

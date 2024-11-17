@@ -4,15 +4,40 @@
   <!-- Navbar -->
   {% include "components/navbar_apapesc.html" %}
   <!-- Conteúdo Principal -->
-  <div class="container mx-auto px-4 lg:px-6 py-6">
-<h1 class="text-3xl font-semibold text-gray-800">
-    Lista de Associados <span class="text-gray-400">Aposentados</span>
+<div class="container mx-auto px-4 lg:px-6 py-6">
+  <!-- Título da Lista -->
+<h1 class="text-3xl font-semibold text-gray-800 mb-4 flex items-center space-x-2">
+    <!-- Título principal -->
+    <span>Associados <span class="text-purple-400">Aposentados</span></span>
+
+    <!-- Grupo de Ícones -->
+<span class="flex items-center space-x-2">
+    <i class="material-icons text-orange-500" style="font-size: 20px;">beach_access</i> <!-- Praia/Férias -->
+    <i class="material-icons text-blue-500" style="font-size: 20px;">flight_takeoff</i> <!-- Viagem -->
+    <i class="material-icons text-green-500" style="font-size: 20px;">celebration</i> <!-- Festa -->
+    <i class="material-icons text-pink-500" style="font-size: 20px;">cake</i> <!-- Bolo/Celebração -->
+</span>
+
 </h1>
-<a href="{% url 'app_associados:buscar_associado' %}"
-   class="text-blue-500 hover:text-gray-400 flex items-center gap-1">
-    Buscar Associado
-    <i class="material-icons" style="font-size: 18px;">search</i>
-</a>
+
+
+  <!-- Seção de Ações -->
+  <div class="flex flex-col sm:flex-row sm:justify-between items-center gap-3 mb-6">
+
+    <!-- Botão para adicionar novo associado -->
+    <a href="{% url 'app_associados:cadastrar_associado' %}"
+       class="bg-gray-100 py-2 px-4 rounded-md shadow hover:bg-green-300 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+      Adicionar Novo Associado(a)
+    </a>
+
+    <!-- Botão para buscar associado -->
+    <a href="{% url 'app_associados:buscar_associado' %}"
+       class="flex items-center gap-2 bg-gray-100 text-blue-500 py-2 px-4 rounded-md shadow hover:bg-gray-200 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+      <i class="material-icons" style="font-size: 18px;">search</i>
+      Buscar Associado
+    </a>
+
+  </div>
     <!-- Tabela de Associados Aposentados -->
     <div class="mt-6 overflow-x-auto bg-white shadow-md rounded-lg">
       <table class="min-w-full bg-white border border-gray-300 rounded-md text-sm">
@@ -28,7 +53,7 @@
         <tbody>
           {% for associado in object_list %}
             <tr class="even:bg-gray-50 hover:bg-gray-200 transition-colors">
-              <td class="px-6 py-3">{{ associado.nome_completo }}</td>
+              <td class="hover:text-purple-600 px-6 py-3">{{ associado.nome_completo }}</td>
               <td class="px-6 py-3">{{ associado.celular }}</td>
               <td class="px-6 py-3">
                 <div class="flex items-center">
@@ -67,8 +92,8 @@
 
     <!-- Botão Voltar para a Lista de Associados Ativos -->
     <div class="mt-6 flex justify-start">
-      <a href="{% url 'app_associados:lista_associados' %}" class="bg-gray-500 text-white py-2 px-6 rounded-lg hover:bg-blue-500 transition-colors">
-        Voltar para a Lista de Associados Ativos
+      <a href="{% url 'app_associados:lista_associados' %}" class="bg-gray-100 text-blue py-2 px-6 rounded-lg hover:bg-blue-300 transition-colors">
+        Voltar para a Lista de Ativos
       </a>
     </div>
   </div>

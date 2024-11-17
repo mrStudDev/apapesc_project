@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="{% static 'output.css' %}" rel="stylesheet">
+
 </head>
 <body>
 
@@ -25,6 +26,9 @@
 {% block delete_associado %}{% endblock delete_associado %}
 {% block aposentados %}{% endblock aposentados %}
 {% block buscar_associado %}{% endblock buscar_associado %}
+{% block desassociados %}{% endblock desassociados %}
+{% block clientes_especiais %}{% endblock clientes_especiais %}
+{% block candidatos %}{% endblock candidatos %}
 
 <!--Cadastro e de Repartições -->
  {% block lista_reparticoes %}{% endblock lista_reparticoes %}
@@ -43,9 +47,15 @@
 <!--BLOCOS DO APP DOCUMENTOS-->
 {% block upload_documentos %}{% endblock upload_documentos %}
 {% block documento_detail %}{% endblock documento_detail %}
+
+<!--BLOCOS DO APP AUTOMAÇÕES -->
+{% block pagina_acoes %}{% endblock pagina_acoes %}
+
+
 <!--BLOCOS DO APP TAREFAS-->
 <!--BLOCOS DO APP AGENDAMENTOS-->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7/inputmask.min.js"></script>
 </body>
 
 </html>

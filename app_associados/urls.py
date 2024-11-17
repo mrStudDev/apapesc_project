@@ -16,6 +16,9 @@ from .views import (
     ReparticaoDeleteView,
     ReparticaoListView,
     ReparticaoDetailView,
+    DesassociadosListView,
+    ClientesEspeciaisListView,
+    CandidatosListView
 )
 
 app_name = 'app_associados'
@@ -28,6 +31,10 @@ urlpatterns = [
     path('associado/<int:pk>/delete/', AssociadoDeleteView.as_view(), name='deletar_associado'),
     path('aposentados/', AssociadoAposentadoListView.as_view(), name='lista_associados_aposentados'),
     path('buscar/', AssociadoSearchView.as_view(), name='buscar_associado'),
+
+    path('desassociados/', DesassociadosListView.as_view(), name='lista_desassociados'),
+    path('clientes_especiais/', ClientesEspeciaisListView.as_view(), name='lista_clientes_especiais'),
+    path('candidatos/', CandidatosListView.as_view(), name='lista_candidatos'),
 
     path('lista_reparticoes/', ReparticaoListView.as_view(), name='lista_reparticoes'),
     path('reparticao/<int:pk>/', ReparticaoDetailView.as_view(), name='detail_reparticao'),

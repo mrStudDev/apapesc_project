@@ -3,6 +3,28 @@ from django.core.exceptions import ValidationError
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from .models import AssociadoModel, MunicipiosCircusnscricaoModel, ReparticaoModel
+from app_associados.utils import validar_quantidade
+from decimal import Decimal, InvalidOperation
+from django import forms
+from decimal import Decimal, InvalidOperation
+
+class BRDecimalField(forms.DecimalField):
+    def to_python(self, value):
+        if value in self.empty_values:
+            return None
+
+        # Remove o separador de milhares e substitui a vírgula pelo ponto decimal
+        value = value.replace('.', '').replace(',', '.')
+
+        try:
+            return Decimal(value)
+        except (ValueError, InvalidOperation):
+            raise forms.ValidationError('Digite um número válido.')
+
+    def validate(self, value):
+        super().validate(value)
+        if value is not None and value < 0:
+            raise forms.ValidationError('A quantidade não pode ser negativa.')
 
 class AssociadoForm(forms.ModelForm):
     content = forms.CharField(
@@ -11,6 +33,51 @@ class AssociadoForm(forms.ModelForm):
         }),
         required=False,
         label="Anotações"
+    )
+    quantidade1 = BRDecimalField(
+        max_digits=10,
+        decimal_places=2,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': '0,00',
+            'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700',
+        })
+    )
+    quantidade2 = BRDecimalField(
+        max_digits=10,
+        decimal_places=2,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': '0,00',
+            'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700',
+        })
+    )
+    quantidade3 = BRDecimalField(
+        max_digits=10,
+        decimal_places=2,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': '0,00',
+            'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700',
+        })
+    )
+    quantidade4 = BRDecimalField(
+        max_digits=10,
+        decimal_places=2,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': '0,00',
+            'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700',
+        })
+    )
+    quantidade5 = BRDecimalField(
+        max_digits=10,
+        decimal_places=2,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': '0,00',
+            'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700',
+        })
     )
     class Meta:
         model = AssociadoModel
@@ -72,7 +139,12 @@ class AssociadoForm(forms.ModelForm):
                 'placeholder': 'Local de nascimento',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
-
+            'estado_civil': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'profissao': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
             # Documentos/Números Cidadão INSS/NIT/PIS/TITULO
             'nit': forms.TextInput(attrs={
                 'placeholder': 'Digite somente números 0123456789',
@@ -173,8 +245,6 @@ class AssociadoForm(forms.ModelForm):
             'reparticao': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
-
-
             'data_cadastro': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -182,18 +252,117 @@ class AssociadoForm(forms.ModelForm):
             'status': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+
+            'especie1': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'quantidade1': forms.TextInput(attrs={
+                'placeholder': '000.000,00',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            }),
+            'especie2': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'quantidade2': forms.TextInput(attrs={
+                'placeholder': '000.000,00',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            }),
+            'especie3': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'quantidade3': forms.TextInput(attrs={
+                'placeholder': '000.000,00',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            }),
+            'especie4': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'quantidade4': forms.TextInput(attrs={
+                'placeholder': '000.000,00',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            }),
+            'especie5': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'quantidade5': forms.TextInput(attrs={
+                'placeholder': '000.000,00',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            }),
             'data_atualizacao': forms.DateInput(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }, format='%Y-%m-%d'),
         }
 
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # Pré-popula user_gov com cpf caso user_gov esteja vazio
         if self.instance and self.instance.cpf and not self.instance.user_gov:
             self.fields['user_gov'].initial = self.instance.cpf
+
+            # Formata os valores no formato brasileiro ao carregar o formulário
+            for field_name in ['quantidade1', 'quantidade2', 'quantidade3', 'quantidade4', 'quantidade5']:
+                value = self.initial.get(field_name)
+                if value is not None:
+                    # Converte para string no formato brasileiro
+                    self.initial[field_name] = f"{value:.2f}".replace('.', ',')
+
+        def clean_quantidade1(self):
+            valor = self.cleaned_data.get('quantidade1')
+            if valor:
+                try:
+                    # Remove separador de milhares e substitui vírgula por ponto
+                    valor = valor.replace('.', '').replace(',', '.')
+                    valor = Decimal(valor)
+                except (ValueError, InvalidOperation):
+                    raise forms.ValidationError("Digite um número válido no formato 000.000,00.")
+            return valor
+
+        def clean_quantidade2(self):
+            valor = self.cleaned_data.get('quantidade2')
+            if valor:
+                try:
+                    # Remove separador de milhares e substitui vírgula por ponto
+                    valor = valor.replace('.', '').replace(',', '.')
+                    valor = Decimal(valor)
+                except (ValueError, InvalidOperation):
+                    raise forms.ValidationError("Digite um número válido no formato 000.000,00.")
+            return valor
+
+        def clean_quantidade3(self):
+            valor = self.cleaned_data.get('quantidade3')
+            if valor:
+                try:
+                    # Remove separador de milhares e substitui vírgula por ponto
+                    valor = valor.replace('.', '').replace(',', '.')
+                    valor = Decimal(valor)
+                except (ValueError, InvalidOperation):
+                    raise forms.ValidationError("Digite um número válido no formato 000.000,00.")
+            return valor
+
+        def clean_quantidade4(self):
+            valor = self.cleaned_data.get('quantidade4')
+            if valor:
+                try:
+                    # Remove separador de milhares e substitui vírgula por ponto
+                    valor = valor.replace('.', '').replace(',', '.')
+                    valor = Decimal(valor)
+                except (ValueError, InvalidOperation):
+                    raise forms.ValidationError("Digite um número válido no formato 000.000,00.")
+            return valor
+
+        def clean_quantidade5(self):
+            valor = self.cleaned_data.get('quantidade5')
+            if valor:
+                try:
+                    # Remove separador de milhares e substitui vírgula por ponto
+                    valor = valor.replace('.', '').replace(',', '.')
+                    valor = Decimal(valor)
+                except (ValueError, InvalidOperation):
+                    raise forms.ValidationError("Digite um número válido no formato 000.000,00.")
+            return valor
+
 
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
@@ -211,17 +380,6 @@ class AssociadoForm(forms.ModelForm):
         # Caso senha_gov esteja vazio, preenchê-lo com o valor do CPF validado
         if cpf and not user_gov:
             cleaned_data["senha_gov"] = cpf
-        return cleaned_data
-
-    def clean(self):
-        cleaned_data = super().clean()
-        cpf = cleaned_data.get("cpf")
-        user_gov = cleaned_data.get("user_gov")
-
-        # Caso senha_gov esteja vazio, preenchê-lo com o valor do CPF validado
-        if cpf and not user_gov:
-            cleaned_data["user_gov"] = cpf
-
         return cleaned_data
 
 
@@ -254,11 +412,7 @@ class AssociadoForm(forms.ModelForm):
         celular_formatado = f"({numeros[:2]}){numeros[2:7]}-{numeros[7:]}"
 
         return celular_formatado
-# Retorna apenas os números
 
-
-# forms.py
-from django import forms
 
 class AssociadoSearchForm(forms.Form):
     query = forms.CharField(
@@ -334,10 +488,12 @@ class ReparticaoForm(forms.ModelForm):
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
                 'oninput': 'mascaraTelefone(this)',
             }),
+
             'municipios_circunscricao': forms.SelectMultiple(attrs={
                  'class': 'h-40 overflow-y-auto border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
             }),
         }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -379,3 +535,18 @@ class ReparticaoForm(forms.ModelForm):
             cleaned_data['municipio_sede'] = municipio_sede
 
         return cleaned_data
+
+    def clean_celular_delegado(self):
+        celular_delegado = self.cleaned_data.get('celular_delegado')
+
+        # Remove caracteres não numéricos da string, como parênteses, hífens e espaços
+        numeros = ''.join(c for c in celular_delegado if c.isdigit())
+
+        # Verifique se o número tem 10 ou 11 dígitos
+        if len(numeros) < 10 or len(numeros) > 11:
+            raise ValidationError("O celular deve conter 10 ou 11 dígitos.")
+
+        # Se você desejar, pode formatar o celular de volta ao formato desejado:
+        celular_formatado = f"({numeros[:2]}){numeros[2:7]}-{numeros[7:]}"
+
+        return celular_formatado

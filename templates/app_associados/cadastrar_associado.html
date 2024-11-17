@@ -132,7 +132,28 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
-
+            <div class="mb-4">
+              <label for="{{ form.estado_civil.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.estado_civil.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.estado_civil }}
+              </div>
+              {% for error in form.estado_civil.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.profissao.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.profissao.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.profissao }}
+              </div>
+              {% for error in form.profissao.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
           </div>
         </div>
 
@@ -189,7 +210,6 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
-
           </div>
         </div>
 
@@ -534,10 +554,15 @@
 
               </div>
               <br>
-              <!-- Botão atualizar -->
-            <button type="submit" name="save_and_continue" value="1" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                Atualizar e Continuar Editando
-            </button>
+              <!-- Botão para salvar e ir para a edição -->
+              <button
+                  type="submit"
+                  name="save_and_continue"
+                  value="1"
+                  class="bg-blue-400 hover:bg-green-500 text-white font-medium text-sm py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-sm transition-all duration-200">
+                  Salvar e Continuar Editando
+              </button>
+
             </div>
             <div class="mb-4">
               <label for="{{ form.municipio_circunscricao.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
@@ -579,7 +604,6 @@
           <h2 class="text-xl font-semibold text-gray-700 mb-4">Status do Associado</h2>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Campos da Seção  -->
             <div class="mb-4">
               <label for="{{ form.status.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.status.label }}
@@ -587,6 +611,135 @@
               <small>Determine os status do associado - ativo(a) ou aposentado(a) </small>
               <div class="mt-1">
                 {{ form.status }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Produção Anual  -->
+        <div class="border-b border-gray-300 pb-6 mb-6">
+          <h2 class="text-xl font-semibold text-gray-700 mb-4">Produção - Média Anual</h2>
+              <small>Escolha uma espécie marítima e informe a quantidade.</small>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label for="{{ form.especie1.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.especie1.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.especie1 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.quantidade1.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.quantidade1.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.quantidade1 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label for="{{ form.especie2.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.especie2.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.especie2 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.quantidade2.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.quantidade2.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.quantidade2 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label for="{{ form.especie3.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.especie3.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.especie3 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.quantidade3.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.quantidade3.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.quantidade3 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label for="{{ form.especie4.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.especie4.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.especie4 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.quantidade4.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.quantidade4.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.quantidade4 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="mb-4">
+              <label for="{{ form.especie5.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.especie5.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.especie5 }}
+              </div>
+              {% for error in form.status.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              <label for="{{ form.quantidade5.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.quantidade5.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.quantidade5 }}
               </div>
               {% for error in form.status.errors %}
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
@@ -618,7 +771,12 @@
           <a href="{% url 'app_associados:lista_associados' %}" class="text-blue-500 hover:underline">
             Cancelar
           </a>
-          <button type="submit" name="save_and_view" value="1" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <!-- Botão para salvar e ir para a página de detalhe -->
+          <button
+              type="submit"
+              name="save_and_view"
+              value="1"
+              class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
               Salvar e Visualizar
           </button>
 

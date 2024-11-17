@@ -1,9 +1,9 @@
 {% load static %}
-<nav class="bg-blue-600 text-white">
+<nav style="background-image: linear-gradient(90deg, rgba(42,111,200,1) 0%, rgba(51,51,200,1) 49%, rgba(33,36,168,0.9920343137254902) 100%); color: white;">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Logo -->
         <a href="/" class="flex items-center">
-            <img src="{% static 'images/logoapapesc.png' %}" alt="Logo APAPESC" class="w-16 h-16 md:w-24 md:h-24 object-contain">
+            <img src="{% static 'images/new_logo_apapesc_2024.png' %}" alt="Logo APAPESC" class="w-16 h-16 md:w-24 md:h-24 object-contain">
         </a>
 
         <!-- Botão do menu para dispositivos móveis -->
@@ -25,6 +25,9 @@
                 <div class="absolute left-0 top-full w-48 bg-white text-black rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 invisible group-hover:visible">
                     <a href="{% url 'app_associados:lista_associados' %}" class="block px-4 py-2 hover:bg-gray-200">Ass. Ativos</a>
                     <a href="{% url 'app_associados:lista_associados_aposentados' %}" class="block px-4 py-2 hover:bg-gray-200">Ass. Aposentados</a>
+                    <a href="{% url 'app_associados:lista_desassociados' %}" class="block px-4 py-2 hover:bg-gray-200">Desassociados</a>
+                    <a href="{% url 'app_associados:lista_clientes_especiais' %}" class="block px-4 py-2 hover:bg-gray-200">Clientes Especiais</a>
+                    <a href="{% url 'app_associados:lista_candidatos' %}" class="block px-4 py-2 hover:bg-gray-200">Candidatos</a>
                     <a href="#embarcacoes" class="block px-4 py-2 hover:bg-gray-200">Embarcações</a>
                     <a href="#embarcacoes" class="block px-4 py-2 hover:bg-gray-200">Licenças</a>
                     <a href="{% url 'app_associados:lista_reparticoes' %}" class="block px-4 py-2 hover:bg-gray-200">Repartições Apapesc</a>
@@ -80,6 +83,9 @@
             <div class="bg-blue-600">
                 <a href="{% url 'app_associados:lista_associados' %}" class="block px-6 py-2 hover:bg-blue-700">Ass. Ativos</a>
                 <a href="{% url 'app_associados:lista_associados_aposentados' %}" class="block px-6 py-2 hover:bg-blue-700">Ass. Aposentados</a>
+                <a href="{% url 'app_associados:lista_desassociados' %}" class="block px-6 py-2 hover:bg-blue-700">Desassociados</a>
+                <a href="{% url 'app_associados:lista_clientes_especiais' %}" class="block px-6 py-2 hover:bg-blue-700">Clientes Especiais</a>
+                <a href="{% url 'app_associados:lista_candidatos' %}" class="block px-6 py-2 hover:bg-blue-700">Candidatos</a>
                 <a href="#embarcacoes" class="block px-6 py-2 hover:bg-blue-700">Embarcações</a>
                 <a href="#licencas" class="block px-6 py-2 hover:bg-blue-700">Licenças</a>
                 <a href="{% url 'app_associados:lista_reparticoes' %}" class="block px-6 py-2 hover:bg-blue-700">Repartições Apapesc</a>

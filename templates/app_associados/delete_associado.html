@@ -1,50 +1,62 @@
-<!-- delete_associado.html -->
-
 {% extends 'base.html' %}
 
 {% block delete_associado %}
   <!-- Navbar -->
   {% include "components/navbar_apapesc.html" %}
-  <div class="container mx-auto mt-8">
-    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
 
+<div class="flex items-center justify-center bg-gray-100 py-10">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
       {% if deleted %}
-        <!-- Mensagem de sucesso -->
-        <h2 class="text-xl font-bold mb-4 text-center text-green-600">Associado excluído com sucesso!</h2>
-        <p class="mb-4 text-center">Você será redirecionado para a lista de associados em alguns segundos.</p>
-        <!-- Script para redirecionar após 5 segundos -->
-        <!-- Script para redirecionar após 5 segundos -->
-        <script>
-          setTimeout(function() {
-            window.location.href = "{% url 'app_associados:lista_associados' %}";
-          }, 5000); // Redireciona após 5000 milissegundos (5 segundos)
-        </script>
+        <!-- Mensagem de Sucesso -->
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-4 text-green-600">Associado Excluído com Sucesso!</h2>
+          <p class="mb-4">O associado <strong>{{ associado_nome }}</strong> foi removido do sistema.</p>
+          <p class="mb-4">Você será redirecionado para a lista de associados em breve.</p>
+          <script>
+            setTimeout(function() {
+              window.location.href = "{% url 'app_associados:lista_associados' %}";
+            }, 5000); // Redireciona após 5 segundos
+          </script>
+          <a href="{% url 'app_associados:lista_associados' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Ir para Lista de Associados Agora
+          </a>
+        </div>
       {% else %}
-        <h2 class="text-xl font-bold mb-4 text-center">Confirmar Exclusão</h2>
-        <p class="mb-4 text-center">Tem certeza que deseja excluir o associado <strong>{{ associado.nome }}</strong>?</p>
+        <!-- Confirmar Exclusão -->
+        <h2 class="text-2xl font-bold mb-6 text-center text-red-600">Confirmar Exclusão</h2>
+        <p class="text-center mb-6">Você está prestes a excluir o associado <strong>{{ associado.nome }}</strong>.</p>
+        <p class="text-center text-sm text-gray-500 mb-6">Esta ação não pode ser desfeita.</p>
 
-        <!-- Exibir mais informações do associado -->
-        <div class="mb-4">
+        <!-- Cartão do Associado -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-6">
           {% if associado.foto %}
             <div class="flex justify-center mb-4">
-              <img src="{{ associado.foto.url }}" alt="Foto de {{ associado.nome }}" class="w-32 h-32 object-cover rounded-full">
+              <img src="{{ associado.foto.url }}" alt="Foto de {{ associado.nome }}"
+                   class="w-32 h-32 object-cover rounded-full shadow-md border-2 border-gray-300">
             </div>
           {% endif %}
-          <ul class="text-center">
-            <li><strong>Email:</strong> {{ associado.email }}</li>
-            <li><strong>Data de Nascimento:</strong> {{ associado.data_nascimento|date:"d/m/Y" }}</li>
-            <!-- Adicione outros campos que desejar -->
-          </ul>
+          <div class="text-center">
+            <h3 class="text-lg font-bold text-gray-800">{{ associado.nome }}</h3>
+            <ul class="mt-4 text-sm text-gray-700">
+              <li><strong>Email:</strong> {{ associado.email }}</li>
+              <li><strong>Data de Nascimento:</strong> {{ associado.data_nascimento|date:"d/m/Y" }}</li>
+              <li><strong>Celular:</strong> {{ associado.celular }}</li>
+              <li><strong>CPF:</strong> {{ associado.cpf }}</li>
+              <li><strong>Status:</strong> {{ associado.status }}</li>
+            </ul>
+          </div>
         </div>
 
-        <form method="post" class="text-center">
+        <!-- Botões de Ação -->
+        <form method="post" class="flex items-center justify-center space-x-4">
           {% csrf_token %}
           <button type="submit"
-                  class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
-                  onclick="return confirm('Tem certeza que deseja deletar este associado?')">
-            Sim, excluir
+                  class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400">
+            Sim, Excluir
           </button>
-          <a href="{% url 'app_associados:detalhe_associado' associado.pk %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+          <a href="{% url 'app_associados:detalhe_associado' associado.pk %}"
+             class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400">
             Cancelar
           </a>
         </form>
@@ -52,4 +64,3 @@
     </div>
   </div>
 {% endblock delete_associado %}
-

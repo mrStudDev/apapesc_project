@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 
+import app_automacoes
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('manager/', include('app_manager.urls')),
     path('associados/', include('app_associados.urls')),
     path('documentos/', include('app_documentos.urls')),
+    path('automacoes', include('app_automacoes.urls')),
 
 ]
 

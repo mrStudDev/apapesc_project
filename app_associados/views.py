@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from app_documentos.models import Documento
+from app_home.models import ApapescModel
+from app_associados.utils import formatar_valor_brasileiro
 
 class AssociadosListView(LoginRequiredMixin, ListView):
     model = AssociadoModel
@@ -19,7 +21,7 @@ class AssociadosListView(LoginRequiredMixin, ListView):
         ordering = ['nome_completo']
 
     def get_queryset(self):
-        return AssociadoModel.objects.filter(status="Ativo(a)")
+        return AssociadoModel.objects.filter(status="Associado Lista Ativo(a)")
 
 class AssociadoDetailView(LoginRequiredMixin, DetailView):
     model = AssociadoModel
@@ -28,8 +30,17 @@ class AssociadoDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        associado = self.object
         context['reparticao'] = self.object.reparticao
         context['documentos'] = Documento.objects.filter(associado=self.object)
+        context['apapesc'] = ApapescModel.objects.first()  # Busca a única instância de ApapescModel
+        context['quantidade1'] = formatar_valor_brasileiro(associado.quantidade1)
+        context['quantidade2'] = formatar_valor_brasileiro(associado.quantidade2)
+        context['quantidade3'] = formatar_valor_brasileiro(associado.quantidade3)
+        context['quantidade4'] = formatar_valor_brasileiro(associado.quantidade4)
+        context['quantidade5'] = formatar_valor_brasileiro(associado.quantidade5)
+
         return context
 
 
@@ -44,24 +55,26 @@ class AssociadoCreateView(LoginRequiredMixin, CreateView):
 
         # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            # Redireciona para a mesma página de edição
+            # Redireciona para a página de edição
             return redirect('app_associados:editar_associado', pk=self.object.pk)
 
-        # Caso contrário, redireciona para a página de detalhe
+        if "save_and_view" in self.request.POST:
+            # Redireciona para a página de detalhe
+            return redirect('app_associados:detalhe_associado', pk=self.object.pk)
+
+        # Comportamento padrão (caso necessário)
         return super().form_valid(form)
 
     def get_success_url(self):
-        # URL de sucesso padrão para redirecionar ao detalhe
+        # Redireciona para a página de detalhe por padrão
         return reverse_lazy('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
 
 
 class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
     model = AssociadoModel
     form_class = AssociadoForm
-    template_name = 'app_associados/editar_associado.html'  # Template onde o formulário de edição será renderizado
-    success_url = reverse_lazy('app_associados:detalhe_associado')
+    template_name = 'app_associados/editar_associado.html'
     context_object_name = 'associado'
-
 
     def form_valid(self, form):
         # Salva o objeto
@@ -69,14 +82,18 @@ class AssociadoUpdateView(LoginRequiredMixin, UpdateView):
 
         # Verifica qual botão foi clicado
         if "save_and_continue" in self.request.POST:
-            # Redireciona para a mesma página de edição
+            # Permite continuar editando na mesma página
             return redirect('app_associados:editar_associado', pk=self.object.pk)
 
-        # Caso contrário, redireciona para a página de detalhe
+        if "save_and_view" in self.request.POST:
+            # Redireciona para a página de detalhe
+            return redirect('app_associados:detalhe_associado', pk=self.object.pk)
+
+        # Comportamento padrão (caso necessário)
         return super().form_valid(form)
 
     def get_success_url(self):
-        # URL de sucesso padrão para redirecionar ao detalhe
+        # Redireciona para a página de detalhe por padrão
         return reverse_lazy('app_associados:detalhe_associado', kwargs={'pk': self.object.pk})
 
 
@@ -89,13 +106,16 @@ class AssociadoDeleteView(LoginRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        associado_nome = self.object.nome  # Para usar no contexto, se necessário
+        associado_nome = self.object.nome_completo  # Captura o nome antes de excluir
+        associado_id = self.object.pk  # Opcional, para referência
         self.object.delete()
+
         return render(request, self.template_name, {
-            'associado': self.object,
-            'deleted': True,  # Indica que o objeto foi deletado
-            'associado_nome': associado_nome,
+            'deleted': True,
+            'associado_nome': associado_nome,  # Passa o nome para exibir na mensagem
+            'associado_id': associado_id,
         })
+
 
 class AssociadoAposentadoListView(LoginRequiredMixin, ListView):
     model = AssociadoModel
@@ -106,7 +126,7 @@ class AssociadoAposentadoListView(LoginRequiredMixin, ListView):
         ordering = ['nome_completo']
 
     def get_queryset(self):
-        return AssociadoModel.objects.filter(status="Aposentado(a)")
+        return AssociadoModel.objects.filter(status="Associado Lista Aposentado(a)")
 
 
 class AssociadoSearchView(LoginRequiredMixin, ListView):
@@ -135,6 +155,41 @@ class AssociadoSearchView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
+
+
+class DesassociadosListView(LoginRequiredMixin, ListView):
+    model = AssociadoModel
+    template_name = 'app_associados/lista_desassociados.html'
+    context_object_name = 'associados'
+
+    class Meta:
+        ordering = ['nome_completo']
+
+    def get_queryset(self):
+        return AssociadoModel.objects.filter(status="Desassociado(a)")
+
+class ClientesEspeciaisListView(LoginRequiredMixin, ListView):
+    model = AssociadoModel
+    template_name = 'app_associados/lista_clientes_especiais.html'
+    context_object_name = 'associados'
+
+    class Meta:
+        ordering = ['nome_completo']
+
+    def get_queryset(self):
+        return AssociadoModel.objects.filter(status="Cliente Especial")
+
+class CandidatosListView(LoginRequiredMixin, ListView):
+    model = AssociadoModel
+    template_name = 'app_associados/lista_candidatos.html'
+    context_object_name = 'associados'
+
+    class Meta:
+        ordering = ['nome_completo']
+
+    def get_queryset(self):
+        return AssociadoModel.objects.filter(status="Candidato(a)")
+
 
 
 # Views para Repartição

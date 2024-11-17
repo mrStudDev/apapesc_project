@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.core.validators import RegexValidator
 from django.contrib.auth.hashers import make_password
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.validators import MinValueValidator
 
 # Choices para reutilização
 SEXO_CHOICES = [
@@ -20,7 +21,8 @@ UF_CHOICES = [
     ('PI', 'Piauí'), ('RJ', 'Rio de Janeiro'), ('RN', 'Rio Grande do Norte'),
     ('RS', 'Rio Grande do Sul'), ('RO', 'Rondônia'), ('RR', 'Roraima'),
     ('SC', 'Santa Catarina'), ('SP', 'São Paulo'), ('SE', 'Sergipe'),
-    ('TO', 'Tocantins'), ('UF', 'UF'),
+    ('TO', 'Tocantins'),
+    ('Não declarado', 'Não declarado'),
 ]
 
 
@@ -52,12 +54,69 @@ EMISSOR_RG_CHOICES = [
     ('SSP/SE', 'SSP/SE'),
     ('SSP/TO', 'SSP/TO'),
     ('UF', 'UF'),
+    ('Não declarado', 'Não declarado'),
 ]
 
 STATUS_CHOICES = [
-    ('Ativo(a)', 'Ativo(a)'),
-    ('Aposentado(a)', 'Aposentado(a)'),
+    ('Associado Lista Ativo(a)', 'Associado Lista Ativo(a)'),
+    ('Associado Lista Aposentado(a)', 'Associado  Lista Aposentado(a)'),
+    ('Desassociado(a)', 'Desassociado(a)'),
+    ('Candidato(a)', 'Candidato(a)'),
+    ('Cliente Especial', 'Cliente Especial'),
 ]
+ESPECIES_MARITIMAS = [
+    ('Pampo', 'Pampo'),
+    ('Abrótea', 'Abrótea'),
+    ('Tainha', 'Tainha'),
+    ('Anchova', 'Anchova'),
+    ('Robalo', 'Robalo'),
+    ('Sardinha', 'Sardinha'),
+    ('Atum', 'Atum'),
+    ('Corvina', 'Corvina'),
+    ('Pescada-olhuda', 'Pescada-olhuda'),
+    ('Linguado', 'Linguado'),
+    ('Garoupa', 'Garoupa'),
+    ('Bagre', 'Bagre'),
+    ('Baiacu', 'Baiacu'),
+    ('Cavala', 'Cavala'),
+    ('Xerelete', 'Xerelete'),
+    ('Cação', 'Cação'),
+    ('Marisco', 'Marisco'),
+    ('Não declarado', 'Não declarado'),
+]
+ESTADO_CIVIL_CHOICES = [
+    ('solteiro', 'solteiro'),
+    ('solteira', 'solteira'),
+    ('casado', 'casado'),
+    ('casada', 'casada'),
+    ('divorciado', 'divorciado'),
+    ('divorciada', 'divorciada'),
+    ('viúvo', 'viúvo'),
+    ('viúva', 'viúva'),
+    ('união estável', 'união estável'),  # Mantido original para consistência
+    ('separado judicialmente', 'separado judicialmente'),
+    ('separada judicialmente', 'separada judicialmente'),
+    ('Não declarado', 'Não declarado'),
+
+]
+PROFISSAO_CHOICES = [
+    ('Pescador Profissional', 'Pescador Profissional'),
+    ('Pescadora Profissional', 'Pescadora Profissional'),
+    ('Aposentado', 'Aposentado'),
+    ('Aposentada', 'Aposentada'),
+    ('Profissional Autônomo', 'Profissional Autônomo'),
+    ('Empresário', 'Empresário'),
+    ('Empresária', 'Empresária'),
+    ('Comerciante', 'Comerciante'),
+    ('Professor', 'Professor'),
+    ('Professora', 'Professora'),
+    ('Trabalhador Doméstico', 'Trabalhador Doméstico'),
+    ('Gari', 'Gari'),
+    ('Servidor Público', 'Servidor Público'),
+    ('Micro Empreendedor Individual', 'Micro Empreendedor Individual'),
+    ('Não declarado', 'Não declarado'),
+]
+
 
 class MunicipiosCircusnscricaoModel(models.Model):
     municipio = models.CharField(max_length=120)
@@ -116,20 +175,25 @@ class AssociadoModel(models.Model):
 
     foto = models.ImageField(upload_to='fotos_associados/', blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True, verbose_name="Data de Nascimento")
-    # Documento RG
-    rg_numero = models.CharField(max_length=20, unique=True, verbose_name="Número do RG", blank=True, null=True)
-    rg_orgao = models.CharField(
-        max_length=10,
-        choices=EMISSOR_RG_CHOICES,
-        default='UF',  # Um valor padrão, se necessário,
-        verbose_name="RG-Orgão Emissor"
-    )
-    rg_data_emissao = models.DateField(blank=True, null=True, verbose_name="Data Emissão do RG")
-    naturalidade = models.CharField(max_length=100, blank=True, null=True)
     sexo_biologico = models.CharField(max_length=15, choices=SEXO_CHOICES, default="Não declarado",
                                       verbose_name="Sexo Biológico")
     nome_mae = models.CharField(max_length=100, verbose_name="Nome da Mãe", blank=True, null=True)
     nome_pai = models.CharField(max_length=100, verbose_name="Nome do Pai", blank=True, null=True)
+    estado_civil = models.CharField(
+        max_length=50, choices=ESTADO_CIVIL_CHOICES, blank=True, null=True, verbose_name="Estado Civil",
+        default="Não declarado"
+    )
+    profissao = models.CharField(max_length=50, choices=PROFISSAO_CHOICES, blank=True, null=True, default="Nao declarado")
+    # Documento RG
+    rg_numero = models.CharField(max_length=20, unique=True, verbose_name="Número do RG", blank=True, null=True)
+    rg_orgao = models.CharField(
+        max_length=50,
+        choices=EMISSOR_RG_CHOICES,
+        default='Não declarado',  # Um valor padrão, se necessário,
+        verbose_name="RG-Orgão Emissor"
+    )
+    rg_data_emissao = models.DateField(blank=True, null=True, verbose_name="Data Emissão do RG")
+    naturalidade = models.CharField(max_length=100, blank=True, null=True)
 
     # Documentos/Números Cidadão INSS/NIT/PIS/TITULO
     nit = models.CharField(max_length=25, blank=True, null=True, verbose_name="Número do NIT", unique=True)
@@ -147,7 +211,7 @@ class AssociadoModel(models.Model):
                             verbose_name="Número Carteira Trabalho (CTPS)")
     ctps_serie = models.CharField(max_length=25, blank=True, null=True, verbose_name="CTPS - Série")
     ctps_data_emissao = models.DateField(blank=True, null=True, verbose_name="Data Emissão da CTPS")
-    ctps_uf = models.CharField(blank=True, null=True, max_length=2, choices=UF_CHOICES, default="UF",
+    ctps_uf = models.CharField(blank=True, null=True, max_length=50, choices=UF_CHOICES, default="Não declarado",
                                verbose_name="CTPS UF")
     # Documentação de Hanbilitação
     cnh = models.CharField(max_length=25, blank=True, null=True, unique=True, verbose_name="Núm. Registro da CNH")
@@ -168,7 +232,7 @@ class AssociadoModel(models.Model):
         verbose_name="CEP"
     )
     municipio = models.CharField(max_length=100, default="", blank=True, null=True)
-    uf = models.CharField(max_length=2, choices=UF_CHOICES, default="SC", blank=True, null=True, verbose_name="UF")
+    uf = models.CharField(max_length=50, choices=UF_CHOICES, default="Não declarado", blank=True, null=True, verbose_name="Estado")
 
     # Acesso ao Governo
     user_gov = models.CharField(max_length=25, blank=True, null=True)
@@ -183,7 +247,70 @@ class AssociadoModel(models.Model):
     data_cadastro = models.DateField(null=True, blank=True, verbose_name="Data da Filiação")
     status = models.CharField(max_length=40, blank=True, null=True, choices=STATUS_CHOICES,
                               verbose_name="Status",
-                              default="Ativo(a)")
+                              default="Associado Lista Ativo(a)")
+    especie1 = models.CharField(
+        max_length=50, choices=ESPECIES_MARITIMAS, blank=True, null=True, verbose_name="Espécie 1",
+        default="Não declarado"
+    )
+    quantidade1 = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        blank=True,
+        null=True,
+        verbose_name="Quantidade 1 (Kg)"
+    )
+
+    especie2 = models.CharField(
+        max_length=50, choices=ESPECIES_MARITIMAS, blank=True, null=True, verbose_name="Espécie 2",
+        default="Não declarado"
+    )
+    quantidade2 = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        blank=True,
+        null=True,
+        verbose_name="Quantidade 2 (Kg)"
+    )
+
+    especie3 = models.CharField(
+        max_length=50, choices=ESPECIES_MARITIMAS, blank=True, null=True, verbose_name="Espécie 3",
+        default="Não declarado"
+    )
+    quantidade3 = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        blank=True,
+        null=True,
+        verbose_name="Quantidade 3 (Kg)"
+    )
+
+    especie4 = models.CharField(
+        max_length=50, choices=ESPECIES_MARITIMAS, blank=True, null=True, verbose_name="Espécie 4",
+        default="Não declarado"
+    )
+    quantidade4 = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        blank=True,
+        null=True,
+        verbose_name="Quantidade 4 (Kg)"
+    )
+    especie5 = models.CharField(
+        max_length=50, choices=ESPECIES_MARITIMAS, blank=True, null=True, verbose_name="Espécie 5",
+        default="Não declarado"
+    )
+    quantidade5 = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        blank=True,
+        null=True,
+        verbose_name="Quantidade 5 (Kg)"
+    )
     data_atualizacao = models.DateTimeField(auto_now=True)
     # Anotações
     content = RichTextUploadingField(blank=True, null=True, verbose_name="Anotações")
