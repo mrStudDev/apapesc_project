@@ -9,7 +9,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Instalando dependências do sistema
-RUN apt-get update && apt-get install -y --no-install-recommends \
+sudo apt-get update
+RUN sudo apt-get update && apt-get install -y --no-install-recommends \
     libreoffice \
     locales \
     unoconv \
