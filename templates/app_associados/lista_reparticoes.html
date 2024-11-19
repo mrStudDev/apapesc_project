@@ -4,60 +4,70 @@
   <!-- Navbar -->
   {% include 'components/navbar_apapesc.html' %}
 
-<div class="container mx-auto py-6">
-  <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Lista de Repartições</h1>
+  <div class="container mx-auto py-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Lista de Repartições</h1>
 
-  {% if reparticoes %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for reparticao in reparticoes %}
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-          <h2 class="text-xl font-semibold text-blue-700 mb-2">
-            <a href="{% url 'app_associados:detail_reparticao' reparticao.id %}" class="hover:underline">
-              {{ reparticao.nome_reparticao }}
-            </a>
-          </h2>
+    {% if reparticoes %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for reparticao in reparticoes %}
+          <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border-t-4 border-blue-500">
+            <h2 class="text-xl font-semibold text-blue-700 mb-4 flex items-center">
+              <i class="material-icons text-blue-500 mr-2">business</i>
+              <a href="{% url 'app_associados:detail_reparticao' reparticao.id %}" class="hover:underline">
+                {{ reparticao.nome_reparticao }}
+              </a>
+            </h2>
 
-          <p class="text-gray-600">
-            <strong>Delegado Responsável:</strong> {{ reparticao.delegado_responsavel }}
-          </p>
-          <p class="text-gray-600 flex items-center">
-            <strong>Celular:</strong>
-            <span id="celular-{{ reparticao.id }}" class="ml-2">{{ reparticao.celular_delegado }}</span>
-            <button onclick="copyToClipboard('celular-{{ reparticao.id }}')" class="ml-2 text-gray-500 hover:text-gray-700">
-              <i class="material-icons" style="font-size: 18px;">content_copy</i>
-            </button>
-          </p>
-          <p class="text-gray-600">
-            <strong>Email:</strong>
-            <a href="mailto:{{ reparticao.email_delegado }}" class="text-blue-600 hover:underline">{{ reparticao.email_delegado }}</a>
-          </p>
-          <div class="mt-4">
-            <a href="{% url 'app_associados:editar_reparticao' reparticao.id %}" class="text-sm text-blue-500 hover:underline">
-              Editar
-            </a>
-            |
-            <a href="{% url 'app_associados:deletar_reparticao' reparticao.id %}" class="text-sm text-red-500 hover:underline">
-              Deletar
-            </a>
+            <p class="text-gray-600 mb-2">
+              <i class="material-icons text-green-500 align-middle mr-1" style="font-size: 20px;">person</i>
+              <strong>Delegado:</strong> {{ reparticao.delegado_responsavel }}
+            </p>
+
+            <p class="text-gray-600 mb-2 flex items-center">
+              <i class="material-icons text-blue-500 align-middle mr-1" style="font-size: 20px;">phone</i>
+              <strong>Celular:</strong>
+              <span id="celular-{{ reparticao.id }}" class="ml-2">{{ reparticao.celular }}</span>
+              <button onclick="copyToClipboard('celular-{{ reparticao.id }}')" class="ml-2 text-gray-500 hover:text-gray-700">
+                <i class="material-icons" style="font-size: 18px;">content_copy</i>
+              </button>
+            </p>
+
+            <p class="text-gray-600 mb-4">
+              <i class="material-icons text-orange-500 align-middle mr-1" style="font-size: 20px;">email</i>
+              <strong>Email:</strong>
+              <a href="mailto:{{ reparticao.email }}" class="text-blue-600 hover:underline">{{ reparticao.email }}</a>
+            </p>
+
+            <div class="flex justify-between mt-4">
+              <a href="{% url 'app_associados:editar_reparticao' reparticao.id %}"
+                 class="text-sm text-blue-500 hover:underline flex items-center">
+                <i class="material-icons text-blue-500 mr-1" style="font-size: 18px;">edit</i>
+                Editar
+              </a>
+              <a href="{% url 'app_associados:deletar_reparticao' reparticao.id %}"
+                 class="text-sm text-red-500 hover:underline flex items-center">
+                <i class="material-icons text-red-500 mr-1" style="font-size: 18px;">delete</i>
+                Deletar
+              </a>
+            </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p class="text-gray-600 text-center">Nenhuma repartição cadastrada.</p>
-  {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-gray-600 text-center">Nenhuma repartição cadastrada.</p>
+    {% endif %}
 
-  <div class="mt-6 text-center">
-    <a href="{% url 'app_associados:criar_reparticao' %}" class="text-blue-600 font-semibold hover:underline">
-      + Adicionar Nova Repartição
-    </a>
+    <div class="mt-8 text-center">
+      <a href="{% url 'app_associados:criar_reparticao' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105">
+        + Adicionar Nova Repartição
+      </a>
+    </div>
   </div>
-</div>
+
   <!-- Footer -->
   {% include "components/footer_apapesc.html" %}
   <!-- Inclua o arquivo JavaScript externo -->
   <script src="{% static 'js/copy_to_clipboard.js' %}"></script>
 {% endblock lista_reparticoes %}
-
 
 

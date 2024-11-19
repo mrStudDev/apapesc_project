@@ -8,6 +8,7 @@ from decimal import Decimal, InvalidOperation
 from django import forms
 from decimal import Decimal, InvalidOperation
 
+
 class BRDecimalField(forms.DecimalField):
     def to_python(self, value):
         if value in self.empty_values:
@@ -95,7 +96,12 @@ class AssociadoForm(forms.ModelForm):
                 'oninput': 'mascaraCPF(this)',  # Chama a função de máscara para CPF
             }),
             'celular': forms.TextInput(attrs={
-                'placeholder': '(48)99999-9999',
+                'placeholder': '(99)99999-9999',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+                'oninput': 'mascaraTelefone(this)',  # Chama a função de máscara para celular
+            }),
+            'celular_correspondencia': forms.TextInput(attrs={
+                'placeholder': '(99)99999-9999',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
                 'oninput': 'mascaraTelefone(this)',  # Chama a função de máscara para celular
             }),
@@ -113,12 +119,27 @@ class AssociadoForm(forms.ModelForm):
             'sexo_biologico': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+            'etnia': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'escolaridade': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
             'nome_mae': forms.TextInput(attrs={
                 'placeholder': 'Nome da Mãe',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
             'nome_pai': forms.TextInput(attrs={
                 'placeholder': 'Nome da Pai',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'estado_civil': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'profissao': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'recolhe_inss': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
 
@@ -139,12 +160,7 @@ class AssociadoForm(forms.ModelForm):
                 'placeholder': 'Local de nascimento',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
-            'estado_civil': forms.Select(attrs={
-                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-            }),
-            'profissao': forms.Select(attrs={
-                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-            }),
+
             # Documentos/Números Cidadão INSS/NIT/PIS/TITULO
             'nit': forms.TextInput(attrs={
                 'placeholder': 'Digite somente números 0123456789',
@@ -158,6 +174,7 @@ class AssociadoForm(forms.ModelForm):
                 'placeholder': 'Digite somente números 0123456789',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+
             # Documentação Profissional
             'rgp': forms.TextInput(attrs={
                 'placeholder': 'SCH00000000',
@@ -175,6 +192,7 @@ class AssociadoForm(forms.ModelForm):
                 'placeholder': 'EX: MPA',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+
             # Documentação de Trabalho
             'ctps': forms.TextInput(attrs={
                 'placeholder': 'Digite somente números 0123456789',
@@ -191,7 +209,8 @@ class AssociadoForm(forms.ModelForm):
             'ctps_uf': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
-            # Documentação de Hanbilitação
+
+            # Documentação de Habilitação CNH
             'cnh': forms.TextInput(attrs={
                 'placeholder': 'Digite somente números 00000000',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -200,6 +219,7 @@ class AssociadoForm(forms.ModelForm):
                 'type': 'date',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }, format='%Y-%m-%d'),
+
             # Endereço residencial
             'logradouro': forms.TextInput(attrs={
                 'placeholder': 'Rua / Servidão / Avenida',
@@ -229,6 +249,7 @@ class AssociadoForm(forms.ModelForm):
             'uf': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+
             # Acesso ao Governo
             'user_gov': forms.TextInput(attrs={
                 'id': 'id_user_gov',
@@ -238,6 +259,7 @@ class AssociadoForm(forms.ModelForm):
             'senha_gov': forms.TextInput(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
+
             # Dados da Filiação
             'municipio_circunscricao': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -253,6 +275,7 @@ class AssociadoForm(forms.ModelForm):
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
 
+            # Dados de Produção Média Anual
             'especie1': forms.Select(attrs={
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             }),
@@ -460,10 +483,16 @@ class ReparticaoForm(forms.ModelForm):
             'nome_reparticao',
             'municipio_sede',
             'delegado_responsavel',
-            'email_delegado',
-            'celular_delegado',
+            'email',
+            'celular',
+            'logradouro',  # Certifique-se de que esses campos estão listados
+            'bairro',
+            'numero',
+            'complemento',
+            'cep',
+            'municipio',
+            'uf',
             'municipios_circunscricao',
-            'novo_municipio_sede',  # Inclua aqui o campo adicional
         ]
         widgets = {
             'nome_reparticao': forms.TextInput(attrs={
@@ -479,16 +508,44 @@ class ReparticaoForm(forms.ModelForm):
                 'placeholder': 'Nome do delegado responsável',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
             }),
-            'email_delegado': forms.EmailInput(attrs={
-                'placeholder': 'exemplo@email.com',
-                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-            }),
-            'celular_delegado': forms.TextInput(attrs={
+            'celular': forms.TextInput(attrs={
                 'placeholder': '(48)99999-9999',
                 'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
                 'oninput': 'mascaraTelefone(this)',
             }),
-
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'exemplo@email.com',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            # Endereço Repartição
+            'logradouro': forms.TextInput(attrs={
+                'placeholder': 'Rua / Servidão / Avenida',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'bairro': forms.TextInput(attrs={
+                'placeholder': 'Bévili-Rios / Vila Joana / Jardim das Flores',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'numero': forms.TextInput(attrs={
+                'placeholder': '0123456789',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'complemento': forms.TextInput(attrs={
+                'placeholder': 'Casa / Apto 71 / Quarto 10',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'cep': forms.TextInput(attrs={
+                'placeholder': '00000-000',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
+                'oninput': 'mascaraCEP(this)'  # Chama a função de máscara para CEP
+            }),
+            'municipio': forms.TextInput(attrs={
+                'placeholder': 'Nome da cidade',
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
+            'uf': forms.Select(attrs={
+                'class': 'appearance-none border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+            }),
             'municipios_circunscricao': forms.SelectMultiple(attrs={
                  'class': 'h-40 overflow-y-auto border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500',
             }),
@@ -536,11 +593,11 @@ class ReparticaoForm(forms.ModelForm):
 
         return cleaned_data
 
-    def clean_celular_delegado(self):
-        celular_delegado = self.cleaned_data.get('celular_delegado')
+    def clean_celular_correspondencia(self):
+        celular_correspondencia = self.cleaned_data.get('celular_correspondencia')
 
         # Remove caracteres não numéricos da string, como parênteses, hífens e espaços
-        numeros = ''.join(c for c in celular_delegado if c.isdigit())
+        numeros = ''.join(c for c in celular_correspondencia if c.isdigit())
 
         # Verifique se o número tem 10 ou 11 dígitos
         if len(numeros) < 10 or len(numeros) > 11:
@@ -550,3 +607,18 @@ class ReparticaoForm(forms.ModelForm):
         celular_formatado = f"({numeros[:2]}){numeros[2:7]}-{numeros[7:]}"
 
         return celular_formatado
+
+    def clean_cep(self):
+        cep = self.cleaned_data.get('cep')
+
+        # Se o CEP não for preenchido, retorna None ou string vazia
+        if not cep:
+            return cep  # Retorna o valor original sem validar
+
+        # Remove o hífen e valida se o valor tem apenas dígitos
+        numeros = ''.join(c for c in cep if c.isdigit())
+
+        if len(numeros) != 8:
+            raise ValidationError("O CEP deve conter exatamente 8 dígitos.")
+
+        return numeros  # Retorna apenas os números

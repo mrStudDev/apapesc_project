@@ -117,6 +117,29 @@ PROFISSAO_CHOICES = [
     ('Não declarado', 'Não declarado'),
 ]
 
+ETNIA_CHOICES = [
+    ('Branco', 'Branco'),
+    ('Pardo', 'Pardo'),
+    ('Preto', 'Preto'),
+    ('Amarelo', 'Amarelo'),
+    ('Indígena', 'Indígena'),
+    ('Outro', 'Outro'),
+    ('Não declarado', 'Não declarado'),
+]
+ESCOLARIDADE_CHOICES = [
+    ('Analfabeto', 'Analfabeto'),
+    ('Primário 1/4 série', 'Primário 1/4 série'),
+    ('Fundamental', 'Fundamental'),
+    ('Ensino Médio', 'Ensino Médio'),
+    ('Ensino Superior', 'Ensino Superior'),
+    ('Não declarado', 'Não declarado'),
+]
+RECOLHE_INSS_CHOICES = [
+    ('Sim', 'Sim'),
+    ('Não', 'Não'),
+    ('Não declarado', 'Não declarado'),
+]
+
 
 class MunicipiosCircusnscricaoModel(models.Model):
     municipio = models.CharField(max_length=120)
@@ -135,8 +158,7 @@ class ReparticaoModel(models.Model):
     )  # Relaciona com o município sede
 
     delegado_responsavel = models.CharField(max_length=120)
-    email_delegado = models.EmailField(unique=True, blank=True, null=True)
-    celular_delegado = models.CharField(
+    celular = models.CharField(
         max_length=15,
         validators=[
             RegexValidator(
@@ -145,6 +167,25 @@ class ReparticaoModel(models.Model):
             )
         ]
     )
+    email = models.EmailField(unique=True, blank=True, null=True)
+
+    # Endereço Repartição
+    logradouro = models.CharField(
+        max_length=255, verbose_name="Logradouro", help_text="Ex: Rua, Servidão, Travessa",
+        default="", blank=True, null=True
+    )
+    bairro = models.CharField(max_length=100, blank=True, null=True, default="")
+    numero = models.CharField(max_length=10, default="", blank=True, null=True, verbose_name="Número")
+    complemento = models.CharField(max_length=255, blank=True, null=True)
+    cep = models.CharField(
+        max_length=9,  # Apenas números (sem o hífen)
+        validators=[RegexValidator(r'^\d{8}$', 'CEP deve conter exatamente 8 dígitos.')],
+        default="", blank=True, null=True,
+        verbose_name="CEP"
+    )
+    municipio = models.CharField(max_length=100, default="", blank=True, null=True)
+    uf = models.CharField(max_length=50, choices=UF_CHOICES, default="Não declarado", blank=True, null=True, verbose_name="Estado")
+
     municipios_circunscricao = models.ManyToManyField(MunicipiosCircusnscricaoModel, related_name='reparticoes', blank=True)  # Relação muitos-para-muitos com municípios
 
     def __str__(self):
@@ -171,19 +212,33 @@ class AssociadoModel(models.Model):
             )
         ]
     )
+    celular_correspondencia = models.CharField(
+        max_length=15,
+        validators=[
+            RegexValidator(
+                r'^\(\d{2}\)\d{5}-\d{4}$',  # Garante que o número seja no formato (XX)XXXXX-XXXX
+                'Número inválido. O telefone deve conter 10 ou 11 dígitos, ex: (48)99999-9999.'
+            )
+        ]
+    )
     email = models.EmailField(unique=True, blank=True, null=True)
 
     foto = models.ImageField(upload_to='fotos_associados/', blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True, verbose_name="Data de Nascimento")
     sexo_biologico = models.CharField(max_length=15, choices=SEXO_CHOICES, default="Não declarado",
                                       verbose_name="Sexo Biológico")
+    etnia = models.CharField(max_length=15, choices=ETNIA_CHOICES, default="Não declarado",
+                                      verbose_name="Etnia")
+    escolaridade = models.CharField(max_length=20, choices=ESCOLARIDADE_CHOICES, default="Não declarado",
+                                      verbose_name="Escolaridade")
     nome_mae = models.CharField(max_length=100, verbose_name="Nome da Mãe", blank=True, null=True)
     nome_pai = models.CharField(max_length=100, verbose_name="Nome do Pai", blank=True, null=True)
     estado_civil = models.CharField(
         max_length=50, choices=ESTADO_CIVIL_CHOICES, blank=True, null=True, verbose_name="Estado Civil",
         default="Não declarado"
     )
-    profissao = models.CharField(max_length=50, choices=PROFISSAO_CHOICES, blank=True, null=True, default="Nao declarado")
+    profissao = models.CharField(max_length=50, choices=PROFISSAO_CHOICES, blank=True, null=True, default="Não declarado")
+    recolhe_inss = models.CharField(max_length=50, choices=RECOLHE_INSS_CHOICES, blank=True, null=True, default="Não declarado")
     # Documento RG
     rg_numero = models.CharField(max_length=20, unique=True, verbose_name="Número do RG", blank=True, null=True)
     rg_orgao = models.CharField(

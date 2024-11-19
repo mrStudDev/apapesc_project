@@ -66,6 +66,21 @@
             </div>
 
             <div class="mb-4">
+              <label for="{{ form.celular_correspondencia.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.celular_correspondencia.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.celular_correspondencia }}
+              </div>
+              <small class="text-gray-400 text-xs mt-1"> Obrigatório</small><br/>
+              <small>Correspondências- Guias do INSS. Sempre preencher esse campo!</small>
+              {% for error in form.celular_correspondencia.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+
+            </div>
+
+            <div class="mb-4">
               <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.email.label }}
               </label>
@@ -99,6 +114,7 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
             <div class="mb-4">
               <label for="{{ form.sexo_biologico.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.sexo_biologico.label }}
@@ -110,6 +126,31 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
+            <div class="mb-4">
+              <label for="{{ form.etnia.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.etnia.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.etnia }}
+              </div>
+              {% for error in form.etnia.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+
+            <div class="mb-4">
+              <label for="{{ form.escolaridade.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.escolaridade.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.escolaridade }}
+              </div>
+              {% for error in form.escolaridade.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
+
             <div class="mb-4">
               <label for="{{ form.nome_mae.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.nome_mae.label }}
@@ -121,6 +162,7 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
             <div class="mb-4">
               <label for="{{ form.nome_pai.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.nome_pai.label }}
@@ -132,6 +174,7 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
             <div class="mb-4">
               <label for="{{ form.estado_civil.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.estado_civil.label }}
@@ -143,6 +186,7 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
             <div class="mb-4">
               <label for="{{ form.profissao.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.profissao.label }}
@@ -154,10 +198,22 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
+            <div class="mb-4">
+              <label for="{{ form.recolhe_inss.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                {{ form.recolhe_inss.label }}
+              </label>
+              <div class="mt-1">
+                {{ form.recolhe_inss }}
+              </div>
+              {% for error in form.recolhe_inss.errors %}
+                <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+              {% endfor %}
+            </div>
           </div>
         </div>
 
-        <!-- Seção 2: Documentos -->
+        <!-- Seção 2: Documentos RG -->
         <div class="border-b border-gray-300 pb-6 mb-6">
           <h2 class="text-xl font-semibold text-gray-700 mb-4">Documento de RG</h2>
 
@@ -258,7 +314,7 @@
           </div>
         </div>
 
-         <!--Seção: Documentos profissional -->
+         <!--Seção: Documentos profissionais -->
         <div class="border-b border-gray-300 pb-6 mb-6">
           <h2 class="text-xl font-semibold text-gray-700 mb-4">Documentação Profissional - RGP</h2>
 
@@ -299,6 +355,7 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
+
             <div class="mb-4">
               <label for="{{ form.rgp_mpa.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
                 {{ form.rgp_mpa.label }}
@@ -310,9 +367,9 @@
                 <p class="text-red-500 text-xs mt-1">{{ error }}</p>
               {% endfor %}
             </div>
-
           </div>
         </div>
+
          <!--Seção: Documentos Documento de trabalho -->
         <div class="border-b border-gray-300 pb-6 mb-6">
           <h2 class="text-xl font-semibold text-gray-700 mb-4">Documentação Trabalho - CTPS</h2>
@@ -402,7 +459,7 @@
           </div>
         </div>
 
-        <!-- Seção Endereço -->
+        <!-- Seção Endereço do Associado -->
         <div class="border-b border-gray-300 pb-6 mb-6">
           <h2 class="text-xl font-semibold text-gray-700 mb-4">Endereço</h2>
 

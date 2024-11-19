@@ -5,61 +5,189 @@
   {% include 'components/navbar_apapesc.html' %}
 
   <div class="container max-w-2xl mx-auto py-6 px-4">
+    <!-- Título Principal -->
     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Detalhes da Repartição</h1>
 
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-semibold text-blue-700 mb-4">{{ reparticao.nome_reparticao }}</h2>
+    <!-- Bloco: Detalhes da Repartição -->
+    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-lg shadow-lg mb-6">
+      <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+        <i class="material-icons text-blue-500 mr-2">business</i>{{ reparticao.nome_reparticao }}
+      </h2>
 
       <div class="space-y-2">
-        <p><strong class="text-gray-600">Município Sede:</strong> {{ reparticao.municipio_sede }}</p>
-        <p><strong class="text-gray-600">Delegado Responsável:</strong> {{ reparticao.delegado_responsavel }}</p>
         <p class="flex items-center">
-          <strong class="text-gray-600">Email do Delegado:</strong>
-          <a href="mailto:{{ reparticao.email_delegado }}" class="text-blue-600 hover:underline ml-2">
-            {{ reparticao.email_delegado }}
-          </a>
+          <i class="material-icons text-blue-500 mr-2">location_on</i>
+          <strong class="text-gray-600">Município Sede:</strong>
+          <span class="ml-2">{{ reparticao.municipio_sede }}</span>
         </p>
         <p class="flex items-center">
-          <strong class="text-gray-600">Celular do Delegado:</strong>
-          <span id="celular-{{ reparticao.id }}" class="ml-2">{{ reparticao.celular_delegado }}</span>
+          <i class="material-icons text-green-500 mr-2">person</i>
+          <strong class="text-gray-600">Delegado Responsável:</strong>
+          <span class="ml-2">{{ reparticao.delegado_responsavel }}</span>
+        </p>
+        <p class="flex items-center">
+          <i class="material-icons text-purple-500 mr-2">email</i>
+          <strong class="text-gray-600">Email:</strong>
+          <a href="mailto:{{ reparticao.email }}" class="text-blue-600 hover:underline ml-2">{{ reparticao.email }}</a>
+        </p>
+        <p class="flex items-center">
+          <i class="material-icons text-yellow-500 mr-2">phone</i>
+          <strong class="text-gray-600">Celular:</strong>
+          <span id="celular-{{ reparticao.id }}" class="ml-2">{{ reparticao.celular }}</span>
           <button onclick="copyToClipboard('celular-{{ reparticao.id }}')" class="ml-2 text-gray-500 hover:text-gray-700">
             <i class="material-icons" style="font-size: 18px;">content_copy</i>
           </button>
         </p>
       </div>
+    </div>
 
-      <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Municípios de Circunscrição</h3>
-      <ul class="list-disc pl-6 text-gray-700">
-        {% for municipio in reparticao.municipios_circunscricao.all %}
-          <li>{{ municipio.municipio }}</li>
-        {% empty %}
-          <li class="text-gray-500">Nenhum município listado.</li>
-        {% endfor %}
-      </ul>
+      <!-- Seção: Endereço -->
+      <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+          <h2 class="text-base font-semibold text-gray-700 mb-6 border-b pb-2">Endereço</h2>
 
-      <!-- Botões de Ação -->
-      <div class="mt-6 flex justify-between">
-        <a href="{% url 'app_associados:editar_reparticao' reparticao.id %}"
-           class="text-sm bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
-          Editar
-        </a>
-        <a href="{% url 'app_associados:deletar_reparticao' reparticao.id %}"
-           class="text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
-          Deletar
-        </a>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <!-- Logradouro -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-blue-500" style="font-size: 24px;">location_on</i>
+                  <div>
+                      <strong class="text-gray-700">Logradouro:</strong>
+                      <div class="flex items-center">
+                          <span id="logradouro-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.logradouro }}</span>
+                          <button onclick="copyToClipboard('logradouro-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-blue-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Bairro -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-green-500" style="font-size: 24px;">map</i>
+                  <div>
+                      <strong class="text-gray-700">Bairro:</strong>
+                      <div class="flex items-center">
+                          <span id="bairro-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.bairro }}</span>
+                          <button onclick="copyToClipboard('bairro-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-green-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Número -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-yellow-500" style="font-size: 24px;">format_list_numbered</i>
+                  <div>
+                      <strong class="text-gray-700">Número:</strong>
+                      <div class="flex items-center">
+                          <span id="numero-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.numero }}</span>
+                          <button onclick="copyToClipboard('numero-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-yellow-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Complemento -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-purple-500" style="font-size: 24px;">notes</i>
+                  <div>
+                      <strong class="text-gray-700">Complemento:</strong>
+                      <div class="flex items-center">
+                          <span id="complemento-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.complemento }}</span>
+                          <button onclick="copyToClipboard('complemento-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-purple-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- CEP -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-blue-500" style="font-size: 24px;">mail_outline</i>
+                  <div>
+                      <strong class="text-gray-700">CEP:</strong>
+                      <div class="flex items-center">
+                          <span id="cep-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.cep }}</span>
+                          <button onclick="copyToClipboard('cep-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-blue-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Município -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-green-500" style="font-size: 24px;">location_city</i>
+                  <div>
+                      <strong class="text-gray-700">Município:</strong>
+                      <div class="flex items-center">
+                          <span id="municipio-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.municipio }}</span>
+                          <button onclick="copyToClipboard('municipio-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-green-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- UF -->
+              <div class="flex items-center space-x-3">
+                  <i class="material-icons text-purple-500" style="font-size: 24px;">public</i>
+                  <div>
+                      <strong class="text-gray-700">UF:</strong>
+                      <div class="flex items-center">
+                          <span id="uf-{{ reparticao.pk }}" class="text-gray-800">{{ reparticao.uf }}</span>
+                          <button onclick="copyToClipboard('uf-{{ reparticao.pk }}')" class="ml-2 text-gray-600 hover:text-purple-500">
+                              <i class="material-icons" style="font-size: 16px;">content_copy</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
 
-      <!-- Botão de Voltar -->
-      <div class="mt-4 text-center">
-        <a href="{% url 'app_associados:lista_reparticoes' %}" class="text-blue-500 hover:underline">
-          Voltar à lista de repartições
-        </a>
-      </div>
+<!-- Seção: Municípios de Circunscrição -->
+<div class="bg-white p-6 rounded-lg shadow-lg">
+  <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+    <i class="material-icons text-blue-500 mr-2">location_city</i>
+    Municípios de Circunscrição
+  </h2>
+
+  {% if reparticao.municipios_circunscricao.all %}
+  <div class="flex flex-wrap gap-2">
+    {% for municipio in reparticao.municipios_circunscricao.all %}
+    <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+      <i class="material-icons text-blue-500 mr-1" style="font-size: 18px;">place</i>
+      {{ municipio.municipio }}
+    </span>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-gray-500">Nenhum município listado.</p>
+  {% endif %}
+</div>
+
+
+    <!-- Botões de Ação -->
+    <div class="mt-6 flex justify-between">
+      <a href="{% url 'app_associados:editar_reparticao' reparticao.id %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
+        Editar
+      </a>
+      <a href="{% url 'app_associados:deletar_reparticao' reparticao.id %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+        Deletar
+      </a>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="mt-4 text-center">
+      <a href="{% url 'app_associados:lista_reparticoes' %}" class="text-blue-500 hover:underline">
+        Voltar à lista de repartições
+      </a>
     </div>
   </div>
-  <!-- Inclua o arquivo JavaScript externo -->
+
+  <!-- Script externo -->
   <script src="{% static 'js/copy_to_clipboard.js' %}"></script>
 {% endblock detail_reparticao %}
-
 
 

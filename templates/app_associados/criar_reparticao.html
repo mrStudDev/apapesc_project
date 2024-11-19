@@ -52,9 +52,9 @@
                 </div>
             </div>
 
-            <!-- Seção Dados do Delegado -->
+            <!-- Seção Dados da Repartição -->
             <div class="mb-8 border-b pb-4">
-                <h2 class="text-xl font-semibold text-gray-700 mb-3">Dados do Delegado</h2>
+                <h2 class="text-xl font-semibold text-gray-700 mb-3">Dados da Repartição</h2>
                 <div class="space-y-4">
                     <div>
                         <label for="{{ form.delegado_responsavel.id_for_label }}" class="block text-sm font-medium text-gray-700">Delegado Responsável</label>
@@ -64,20 +64,112 @@
                         {% endfor %}
                     </div>
                     <div>
-                        <label for="{{ form.email_delegado.id_for_label }}" class="block text-sm font-medium text-gray-700">Email do Delegado</label>
-                        {{ form.email_delegado }}
-                        {% for error in form.email_delegado.errors %}
+                        <label for="{{ form.celular.id_for_label }}" class="block text-sm font-medium text-gray-700">Celular da Repartição</label>
+                        {{ form.celular }}
+                        {% for error in form.celular.errors %}
                             <p class="text-red-500 text-xs mt-1">{{ error }}</p>
                         {% endfor %}
                     </div>
                     <div>
-                        <label for="{{ form.celular_delegado.id_for_label }}" class="block text-sm font-medium text-gray-700">Celular do Delegado</label>
-                        {{ form.celular_delegado }}
-                        {% for error in form.celular_delegado.errors %}
+                        <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">Email da Repartição</label>
+                        {{ form.email }}
+                        {% for error in form.email.errors %}
                             <p class="text-red-500 text-xs mt-1">{{ error }}</p>
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+
+            <!-- Seção Endereço da Repartição -->
+            <div class="border-b border-gray-300 pb-6 mb-6">
+              <h2 class="text-xl font-semibold text-gray-700 mb-4">Endereço</h2>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Campos da Seção 3 -->
+                <div class="mb-4">
+                  <label for="{{ form.logradouro.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.logradouro.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.logradouro }}
+                  </div>
+                  {% for error in form.logradouro.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.bairro.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.bairro.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.bairro }}
+                  </div>
+                  {% for error in form.bairro.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.numero.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.numero.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.numero }}
+                  </div>
+                  {% for error in form.numero.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.complemento.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.complemento.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.complemento }}
+                  </div>
+                  {% for error in form.complemento.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.cep.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.cep.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.cep }}
+                  </div>
+                  {% for error in form.cep.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.municipio.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.municipio.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.municipio }}
+                  </div>
+                  {% for error in form.municipio.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+                <div class="mb-4">
+                  <label for="{{ form.uf.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ form.uf.label }}
+                  </label>
+                  <div class="mt-1">
+                    {{ form.uf }}
+                  </div>
+                  {% for error in form.uf.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
 
             <!-- Seção Municípios de Circunscrição -->
@@ -125,5 +217,7 @@
 <!-- Carregar o JavaScript separado -->
 <script src="{% static 'js/mascaraTelefone.js' %}"></script>
 <script src="{% static 'js/municipio_select.js' %}"></script>
+<script src="{% static 'js/mascaraCEP.js' %}"></script>
+<script src="{% static 'js/formularioEventos.js' %}"></script>
 
 {% endblock criar_reparticao %}

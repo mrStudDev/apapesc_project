@@ -64,13 +64,13 @@ class MunicipiosAdmin(admin.ModelAdmin):
 
 @admin.register(ReparticaoModel)
 class ReparticaoAdmin(admin.ModelAdmin):
-    list_display = ('nome_reparticao', 'municipio_sede', 'delegado_responsavel', 'email_delegado', 'celular_delegado')
+    list_display = ('nome_reparticao', 'municipio_sede', 'delegado_responsavel', 'email', 'celular')
     search_fields = ('nome_reparticao', 'delegado_responsavel', 'municipio_sede__municipio')  # Busca por nome da repartição, delegado e município sede
     filter_horizontal = ('municipios_circunscricao',)  # Widget para selecionar múltiplos municípios
 
 
     # Função para formatar o celular na listagem
-    def formatar_celular_delegado(self, obj):
+    def formatar_celular(self, obj):
         if obj.celular_delegado:
             # Verifique se o número tem o formato correto antes de formatar
             if len(obj.celular_delegado) == 11:
