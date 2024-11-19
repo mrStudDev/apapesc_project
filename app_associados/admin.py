@@ -3,7 +3,7 @@ from .models import AssociadoModel, MunicipiosCircusnscricaoModel, ReparticaoMod
 
 @admin.register(AssociadoModel)
 class AssociadoAdmin(admin.ModelAdmin):
-    # Campos exibidos na listagem do admin
+    # Campos exibidos na listagem do admin do django
     list_display = ('nome_completo', 'cpf', 'email', 'celular', 'data_cadastro')
     search_fields = ('nome_completo', 'cpf', 'email')
     list_filter = ('sexo_biologico', 'uf', 'data_cadastro')

@@ -9,4 +9,4 @@ class ApapescAdmin(admin.ModelAdmin):
     list_filter = ('uf',)
 
 admin.site.register(Home)
-# Register your models here.
+# Essa é a seção Admin

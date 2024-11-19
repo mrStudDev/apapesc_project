@@ -23,7 +23,7 @@ class ApapescModel(models.Model):
     razao_social = models.CharField(max_length=255, verbose_name="Razão Social")
     cnpj = models.CharField(max_length=18, unique=True, verbose_name="CNPJ")  # Inclui máscara para validação futura
 
-    # Dados de contato
+    # Dados de contato da Repartição
     celular = models.CharField(
         max_length=15,
         validators=[

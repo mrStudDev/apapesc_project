@@ -621,4 +621,4 @@ class ReparticaoForm(forms.ModelForm):
         if len(numeros) != 8:
             raise ValidationError("O CEP deve conter exatamente 8 dígitos.")
 
-        return numeros  # Retorna apenas os números
+        return numeros  # Retorna apenas os números do celular

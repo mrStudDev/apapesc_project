@@ -222,7 +222,7 @@ class AssociadoModel(models.Model):
             )
         ]
     )
-    email = models.EmailField(unique=True, blank=True, null=True)
+    email = models.EmailField(unique=True, blank=True, null=True) # email
 
     foto = models.ImageField(upload_to='fotos_associados/', blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True, verbose_name="Data de Nascimento")
